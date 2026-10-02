@@ -33,7 +33,7 @@ i.sp{font-style:italic;font-weight:600}
 .brand h1{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:-.01em;line-height:1}
 .brand p{color:var(--muted);font-size:13px;margin-top:6px}
 .hud{display:flex;flex-wrap:wrap;gap:12px 28px;margin-left:auto;align-items:flex-end}
-.gauge{display:grid;gap:3px;min-width:110px}
+.gauge{display:grid;gap:3px;min-width:110px}.hud .bar{max-width:100%}
 .gbig{font-family:var(--display);font-size:20px;font-weight:600;line-height:1.1}
 .gbig span{font-size:12px;color:var(--muted);font-weight:400;margin-left:3px}
 .gsub{font-size:12px;color:var(--muted)}
@@ -69,7 +69,7 @@ i.sp{font-style:italic;font-weight:600}
 .spechead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 .spechead h3{font-size:17px;font-weight:600}
 .specstage{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--warn);color:var(--warn);border-radius:999px;padding:3px 9px;white-space:nowrap;font-weight:700}
-#spec{width:100%;height:300px;display:block;border-radius:10px;border:1px solid var(--line)}
+#spec{width:100%;height:230px;display:block;border-radius:10px;border:1px solid var(--line)}
 .album{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;min-height:74px}
 .album figure{margin:0;display:grid;gap:2px;justify-items:center;flex:none}
 .album canvas{width:58px;height:58px;border-radius:7px;border:1px solid var(--line)}
@@ -86,6 +86,21 @@ i.sp{font-style:italic;font-weight:600}
 .chalbox{display:grid;gap:6px}.chals{display:flex;flex-wrap:wrap;gap:6px}
 .chal{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line2);background:var(--bg2);color:var(--muted);border-radius:99px;padding:5px 11px;cursor:pointer}.chal[aria-pressed="true"]{background:#3A2A55;color:#E4D2FF;border-color:#8B6FC2}.chal:disabled{opacity:.45;cursor:not-allowed}.chal .mono{font-size:11px;opacity:.8}
 .endach{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.endach .eyebrow{width:100%}.medalchip{font-size:12.5px;font-weight:700;color:var(--c);border:1px solid var(--c);border-radius:99px;padding:3px 10px}
+.cwrap:has(#mapbar:not([hidden])) .toast{top:96px}
+.chron{position:fixed;inset:0;z-index:35;background:rgba(3,9,12,.8);overflow:auto;padding:20px 16px}.chroncard{max-width:620px;margin:0 auto;display:grid;gap:10px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:14px}.chroncard img{width:100%;border-radius:10px;display:block}a.btn{text-decoration:none;display:inline-block}
+.newbest{font-weight:800;color:#FFD76A;font-size:15px}
+@media (max-width:700px){
+ .brand p{display:none}.brand h1{font-size:22px}.top{padding-block:10px 8px;gap:8px 16px}
+ .hud{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 12px;width:100%}.gauge{min-width:0}.gbig{font-size:16px}.gsub{font-size:11px}.bars{width:100%}
+ .layout{margin-top:10px;gap:12px}.toolbar{gap:6px}.hint{flex-basis:100%;font-size:12px}
+ .maplegend{gap:4px}.lg{padding:4px 9px 4px 7px;font-size:12px}.maplegend .lab{display:none}
+ #spec{height:170px}.album{min-height:60px}
+ .seg button{padding:7px 9px}
+}
+.gglist{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}.gg{border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:13px;background:rgba(255,255,255,.02)}.gg summary{cursor:pointer}.gg.off{opacity:.45;display:grid}.gg small{color:var(--muted)}.gg ul{margin:6px 0;padding-left:16px}.gg li.p::marker{color:var(--good)}.gg li.c::marker{color:var(--bad)}
+.scinote{margin-top:8px;padding:8px 10px;border-left:3px solid var(--o2);background:rgba(134,211,227,.06);border-radius:6px;display:grid;gap:4px;font-size:13px}
+.quiz{display:grid;gap:10px;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:rgba(134,211,227,.04)}.qq{display:grid;gap:6px}.qq p{font-size:13.5px}.qopts{display:grid;gap:5px}
+.qo{font:inherit;font-size:13px;text-align:left;padding:7px 10px;border-radius:8px;border:1px solid var(--line2);background:var(--bg2);color:var(--ink);cursor:pointer}.qo.ok{border-color:var(--good);background:rgba(147,211,138,.15)}.qo.no{border-color:var(--bad);background:rgba(234,122,94,.14)}.qo:disabled{cursor:default}
 .toast.t-ach{background:rgba(40,32,10,.95);border-color:#FFD76A}
 .setupov{position:fixed;inset:0;z-index:22;background:radial-gradient(120% 90% at 30% 20%,#12303A,#081318 70%);overflow:auto;padding:0 16px 32px}
 .sohead{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 0}
@@ -108,7 +123,7 @@ details.wcard{background:none;border:0;padding:0}
 .mapbar{position:absolute;left:50%;top:12px;transform:translateX(-50%);width:min(640px,calc(100% - 24px));display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:rgba(10,26,33,.94);border:1px solid var(--o2);border-radius:12px;padding:9px 12px;font-size:13px;z-index:3;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 @media (max-width:700px){.mapbar{position:fixed;left:8px;right:8px;top:auto;bottom:8px;transform:none;width:auto;z-index:24}}
 html.lock,html.lock body{overflow:hidden}
-.zoomctl{position:absolute;left:10px;top:10px;display:flex;gap:4px;z-index:2}.zoomctl button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line2);background:rgba(8,18,24,.82);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;line-height:1}.zoomctl button:hover{border-color:var(--o2)}
+.zoomctl{position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;z-index:2}.zoomctl button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line2);background:rgba(8,18,24,.82);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;line-height:1}.zoomctl button:hover{border-color:var(--o2)}
 #cv{touch-action:pan-y}#cv.zoomed{touch-action:none;cursor:grab}
 .mapkey{font-size:12.5px;margin:2px 0 6px}.mapkey summary{cursor:pointer;color:var(--muted);font-weight:600}.mkrow{display:flex;flex-wrap:wrap;gap:6px 14px;padding:8px 0 4px}
 .spectabs{display:flex;flex-wrap:wrap;gap:6px}.spectabs:empty{display:none}
@@ -338,13 +353,13 @@ kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);borde
         <button data-act="tool" data-v="burst">Stress burst <span class="cost" data-c="burst">20</span></button>
       </div>
       <div class="seg"><button data-act="menu" class="menubtn">☰ Menu</button></div>
-      <div class="seg"><button data-act="tips" id="tipsBtn" aria-pressed="true">Tips</button><button data-act="sound" id="soundBtn" aria-pressed="true">Sound</button><button data-act="lite" id="liteBtn" aria-pressed="false">Lite graphics</button>
+      <div class="seg" hidden><button data-act="tips" id="tipsBtn" aria-pressed="true">Tips</button><button data-act="sound" id="soundBtn" aria-pressed="true">Sound</button><button data-act="lite" id="liteBtn" aria-pressed="false">Lite graphics</button>
       </div>
       <p class="hint" id="hint"></p>
     </div>
     <div class="cwrap" id="cwrap"><canvas id="cv" aria-label="Live map of the early Earth"></canvas><div class="banner" id="banner" hidden></div><div class="pausetag" id="pausetag"></div><div class="toast" id="toast" role="status" hidden></div><div class="opp" id="opp" hidden></div><div class="coach" id="coach" hidden></div><div class="mapbar" id="mapbar" hidden></div><div class="zoomctl" role="group" aria-label="Zoom"><button data-act="zoom" data-v="in" aria-label="Zoom in">+</button><button data-act="zoom" data-v="out" aria-label="Zoom out">−</button><button data-act="zoom" data-v="fit" aria-label="Show whole world">⤢</button></div></div>
     <div class="maplegend" id="legend" role="group" aria-label="Highlight on map"></div>
-    <details class="mapkey"><summary>Map key</summary><div class="mkrow"><span class="lgb" style="--c:#0C2338">Deep ocean (darker = farther out)</span><span class="lgb" style="--c:#2C8E98">Shallow sea</span><span class="lgb" style="--c:#7AC4CE">Pale line: edge of the shelf</span><span class="lgb" style="--c:#FF9A5A">Glowing cracks: hydrothermal vents</span><span class="lgb" style="--c:#9C8A60">Tidal flats</span><span class="lgb" style="--c:#685E54">Bare rock</span><span class="lgb" style="--c:#C89048">Ringed pools: hot springs</span><span class="lgb" style="--c:#E2EEF6">White bands: polar zones (1 step colder; sea ice over water)</span><span class="lgb" style="--c:#5C96AC">Brine channels</span><span class="lgb" style="--c:#DAE6EE">Ice shell</span></div><p class="why">Hover or tap any patch to read its exact conditions.</p></details>
+    <details class="mapkey"><summary>Map key</summary><div class="mkrow"><span class="lgb" style="--c:#0C2338">Deep ocean (darker = farther out)</span><span class="lgb" style="--c:#2C8E98">Shallow sea</span><span class="lgb" style="--c:#7AC4CE">Pale line: edge of the shelf</span><span class="lgb" style="--c:#FF9A5A">Glowing cracks: hydrothermal vents</span><span class="lgb" style="--c:#9C8A60">Tidal flats</span><span class="lgb" style="--c:#685E54">Bare rock</span><span class="lgb" style="--c:#4E542E">Soil (made by life)</span><span class="lgb" style="--c:#5AAA50">Green tint: microbial mats</span><span class="lgb" style="--c:#C89048">Ringed pools: hot springs</span><span class="lgb" style="--c:#E2EEF6">White bands: polar zones (1 step colder; sea ice over water)</span><span class="lgb" style="--c:#5C96AC">Brine channels</span><span class="lgb" style="--c:#DAE6EE">Ice shell</span></div><p class="why">Hover or tap any patch to read its exact conditions.</p></details>
     <div class="under">
       <div class="panel specimen"><div class="spechead"><div><div class="eyebrow">Specimen · dominant strain</div><h3 id="specName">&nbsp;</h3><p class="why" id="specForm"></p></div><span class="specstage" id="specStage"></span></div><canvas id="spec" aria-label="Your organism, drawn from its genes"></canvas><div class="spectabs" id="specTabs"></div><div class="eyebrow">Lineage album · tap a form to view it</div><div class="album" id="album"></div></div>
       <div class="stackcol"><div class="panel" id="inspect"></div><div class="panel"><div class="eyebrow">Population, last 5 minutes of sim time</div><canvas id="chart"></canvas></div></div>
@@ -369,6 +384,7 @@ kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);borde
   </aside>
 </main>
 <div class="modal" id="modal" hidden></div>
+<div class="chron" id="chron" hidden></div>
 <div class="setupov" id="setupov" hidden><div class="sohead"><div class="brand"><h1>Deep Time</h1></div><button class="btn ghost sm" data-act="menu">☰ Menu</button></div><div class="sobody"><div class="somap"><div class="somapwrap"><canvas id="setupcv" aria-label="Map of this world"></canvas></div><div class="somapnote" id="somapnote"></div></div><div class="sopanel" id="sopanel"></div></div></div>
 <div class="dlg" id="dlg" hidden><div class="dlgcard" id="dlgcard"><div class="dlgtop"><button class="btn ghost sm" data-act="dlgmin">🗺 See the map</button></div><div class="coach inline" id="dlgcoach" hidden></div></div></div>
 <div class="tippop" id="tipPop" role="tooltip" hidden></div>
@@ -392,6 +408,14 @@ function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a
 const ALPH='23456789ABCDEFGHJKMNPQRSTUVWXYZ';
 function encode(n){let s='';for(let i=0;i<6;i++){s=ALPH[n%31]+s;n=Math.floor(n/31)}return s.slice(0,3)+'-'+s.slice(3)}
 const PORDER=['temperate','anoxic','iceshell','locked','hycean','arid','sulfur','rogue','seasonal'];const CORDER=['storm','scarce','hostile','redq','blind'];let FORCE_PLANET=null;
+function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function dailySeed(ds){let h=2166136261;for(const ch of 'deeptime:'+ds){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return h%887503681}
+function startDaily(){const ds=todayStr();const ws=WSIZE,ll=LASTLEN,rn=RIVALN,pp=PLANET_PICK;WSIZE='standard';LASTLEN=20;RIVALN=3;PLANET_PICK=null;FORCE_PLANET=null;
+  makeWorld(dailySeed(ds),'open');G.chal={};G.daily=ds;G.forcedPlanet=G.planet;WSIZE=ws;LASTLEN=ll;RIVALN=rn;PLANET_PICK=pp;buildBG();UI.speciesKey='';UI.draftDirty=true}
+function bestFor(code){return (PROF.bestByCode||{})[code]}
+function recordBest(){try{const code=shareCode(),sc=scoreParts().total;PROF.bestByCode=PROF.bestByCode||{};const prev=PROF.bestByCode[code];G.prevBest=prev==null?null:prev;if(prev==null||sc>prev)PROF.bestByCode[code]=sc;
+  const ks=Object.keys(PROF.bestByCode);if(ks.length>200)delete PROF.bestByCode[ks[0]];
+  if(G.daily){const D=PROF.daily=PROF.daily||{played:{},streak:0,last:''};D.played[G.daily]=Math.max(D.played[G.daily]||0,sc);if(D.last!==G.daily){const y=new Date(G.daily+'T12:00:00');y.setDate(y.getDate()-1);const ys=y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');D.streak=D.last===ys?(D.streak||0)+1:1;D.last=G.daily}}}catch(e){}}
 function shareCode(){if(!G)return '';const li=G.len===10?0:G.len===30?2:1;const c1=(G.gx>40?1:0)+2*(G.world==='history'?1:0)+4*li;const pi=Math.max(0,PORDER.indexOf(G.planet));
   let mask=0;CORDER.forEach((k,i)=>{if(G.chal&&G.chal[k])mask|=1<<i});const rv=clamp(G.mode==='setup'?RIVALN:(G.rivalN||RIVALN),1,5);const v=(rv-1)+5*mask;
   return encode(G.seed)+'-'+ALPH[c1]+ALPH[pi]+ALPH[Math.floor(v/31)]+ALPH[v%31]}
@@ -414,6 +438,7 @@ const BIOMES={
   land:{name:'Bare rock',temp:2,light:3,chem:0,nutr:0,uv:3,dry:2,land:1,col:[72,67,63],note:'No soil and no ozone. Needs UV shielding and drought tolerance.'},
   ice:{name:'Ice shell',temp:-2,light:1,chem:0,nutr:0,uv:1,dry:2,land:1,col:[178,202,214],note:'Kilometers of frozen ocean. Only brine veins stay liquid.'},
   brine:{name:'Brine channels',temp:-1,light:1,chem:0,nutr:2,uv:0,dry:0,tox:1,col:[70,122,142],note:'Salty liquid veins inside the ice: cold, dim, rich in nutrients.'},
+  soil:{name:'Soil',temp:2,light:3,chem:0,nutr:2,uv:2,dry:1,land:1,col:[74,76,44],note:'Made by life: weathered rock mixed with dead organic matter. It holds water and nutrients that bare rock never could.'},
   spring:{name:'Hot spring',temp:3,light:2,chem:2,nutr:1,uv:1,dry:0,land:1,col:[128,88,38],note:'Geothermal pools ringed with microbial mats.'}
 };
 const TEMPN={'-3':'Glacial','-2':'Glacial','-1':'Icy','0':'Cold','1':'Mild','2':'Warm','3':'Hot','4':'Scalding','5':'Scalding','6':'Scalding'};
@@ -537,7 +562,7 @@ let SHOCK=[],PART=[],FLASH=0,ICE=0;const SPR=new Map();
 /* ---------------- helpers ---------------- */
 const cellAt=(x,y)=>clamp(Math.floor(y/GC),0,GY-1)*GX+clamp(Math.floor(x/GC),0,GX-1);
 const cc=c=>[(c%GX+.5)*GC,(Math.floor(c/GX)+.5)*GC];
-function logp(t,m){G.log.push({e:G.epoch,t,m});if(G.log.length>120)G.log.shift();UI.logDirty=true;}
+function logp(t,m){G.log.push({e:G.epoch,t,m});try{chronPush(t,m)}catch(e){}if(G.log.length>120)G.log.shift();UI.logDirty=true;}
 function fxOn(f){return f.until>G.t}
 function fxHas(f,c){let s=FXSET.get(f);if(!s){s=new Set(f.tiles);FXSET.set(f,s)}return s.has(c)}
 function addFx(kind,v,dur,area){const f={kind,v,until:G.t+dur,tiles:null};
@@ -550,8 +575,8 @@ function condCalc(c){const b=BIOMES[G.tb[c]],pol=G.pol[c];const cm=G.cm;
   const light=(G.mod.darkAll||(G.mod.dark&&b.ocean))?0:Math.max(0,b.light-(pol&&b.light?1:0)+fxSum('light',c)+(cm&&b.light>0?cm.l[c]:0));
   const nutr=Math.max(0,b.nutr+(b.ocean?fxSum('nutr',c):0)+(bt==='shallow'||bt==='tidal'?G.mod.nutr:0)+(cm?cm.n[c]:0));
   let uv=b.uv>0?b.uv+G.mod.uv+fxSum('uv',c)+(cm?cm.u[c]:0):0;if(G.mod.darkAll)uv=0;uv=Math.max(0,uv-(G.o2>=1.5?1:0)-(G.o2>=2.5?1:0));
-  const o2=b.deep?Math.max(0,G.o2-1.2):G.o2;
-  return{temp,light,nutr,chem:b.chem+(cm?cm.c[c]:0),uv,dry:b.dry+(cm?cm.d[c]:0),tox:(b.tox||0)+fxSum('tox',c)+(cm?cm.x[c]:0),o2,ocean:!!b.ocean,land:!!b.land};}
+  const o2=b.deep?Math.max(0,G.o2-1.2):G.o2;const eg=G.eng;const turb=eg&&eg.turb[c]>G.t?1:0,mat=eg&&eg.mat[c]>G.t?1:0;
+  return{temp,light,nutr:nutr+turb,chem:b.chem+(cm?cm.c[c]:0),uv,dry:Math.max(0,b.dry+(cm?cm.d[c]:0)-mat),tox:(b.tox||0)+fxSum('tox',c)+(cm?cm.x[c]:0),o2,ocean:!!b.ocean,land:!!b.land};}
 function refreshCond(){for(let c=0;c<NC;c++)COND[c]=condCalc(c);FSTAMP++;}
 
 /* synergies and clashes between genes (applied inside stats) */
@@ -606,7 +631,7 @@ function fitCalc(s,c,kk){const k=kk||COND[c];const{S}=stressOf(s,k);const bt=G.t
   let en=k.nutr>0?(s.f.ferment?.6:(s.f.animal||s.f.fungus)?.45:0)*s.nmul*m:0;
   if(s.f.nitrate&&k.nutr>=1&&k.o2<1&&!G.mod.dark){ec*=1.5;en*=1.5}
   let nb=0;if(s.f.nfix&&(s.f.hetero||k.o2<2))nb+=(s.f.hetero?.25:.12)*S*(s.f.nfixHalf?.5:1);
-  if(s.f.roots&&(bt==='land'||bt==='tidal'||bt==='ice'))nb+=.3*S;
+  if(s.f.roots&&(bt==='land'||bt==='soil'||bt==='tidal'||bt==='ice'))nb+=.3*S;
   if(s.f.icecol&&(bt==='brine'||bt==='ice'))nb+=.35*S;
   const w=(1.0*s.gen*(ec+el+en)+nb)/(.3*s.up);
   return{ec,el,en,nb,S,w};}
@@ -799,7 +824,7 @@ function makeWorld(seed,world){world=world||LASTW;LASTW=world;setWorldSize(WSIZE
   G={seed,code:encode(seed),t:0,et:0,epoch:1,mode:'setup',speed:1,tool:'inspect',o2:0,sink:1.5,sink0:1.5,o2Crossed:false,goeEpoch:0,snowballs:0,mwarm:0,
      fx:[],agents:[],strains:{},species:{},nextStrain:1,nextSp:1,sel:null,sway:40,refuges:[],currents:[],bursts:[],goal:null,goalHist:[],goalsDone:0,log:[],hist:[],ms:{},rivalsExtinct:0,
      ev:null,draft:{},intro:true,over:null,secAcc:0,histAcc:0,hover:null,traits:[],
-     mod:{baseTemp:0,sink:1.5,vents:0,springs:4,ridges:0,ridgeBreak:.18,evw:{},nutr:0,uv:0,bombard:0,polar:Math.round(3*GY/24),dark:0}};G.gx=GX;
+     mod:{baseTemp:0,sink:1.5,vents:0,springs:4,ridges:0,ridgeBreak:.18,evw:{},nutr:0,uv:0,bombard:0,polar:Math.round(3*GY/24),dark:0}};G.gx=GX;G.eng={acc:new Array(NC).fill(0),turb:new Array(NC).fill(0),mat:new Array(NC).fill(0),soil:0,draw:0};
   G.len=LASTLEN;setLen(G.len);G.rivalN=RIVALN;G.chal={};for(const k in (PROF.chal||{}))if(PROF.chal[k]&&chalUnlocked(k))G.chal[k]=1;G.run={};G.newAch=[];G.world=world;G.climTrend=0;G.climUntil=0;G.sea=null;
   const ak=Object.keys(ARCH);G.arch=ak[Math.floor(WR()*ak.length)];
   const tk=Object.keys(WTRAITS);const nT=WR()<.3?3:2;let guard=0;if(world==='history')G.traits=['faint','ironRich'];
@@ -874,7 +899,7 @@ function step(quiet){
   const A=G.agents,n=A.length,born=[];
   const curs=G.currents.filter(f=>f.until>G.t);
   for(let i=0;i<n;i++){const a=A[i];if(a.d)continue;const st=G.strains[a.s];const s=st.sc;const c=a.c;const f=fitGet(st,c);
-    const dem=s.gen*DT;let g=0;const kc=COND[c];const Kh=s.f.multi?.3:s.f.euk?.2:.05;const aff=(p,cap)=>{const r=cap>0?Math.min(1,p/cap):0;return r/(r+Kh)*(1+Kh)};
+    const dem=s.gen*DT;let g=0;const kc=COND[c];const Kh=s.f.multi?.22:s.f.euk?.15:.05;const aff=(p,cap)=>{const r=cap>0?Math.min(1,p/cap):0;return r/(r+Kh)*(1+Kh)};
     if(f.ec>0){const t=Math.min(dem,P.chem[c]);P.chem[c]-=t;g+=t*f.ec*aff(P.chem[c]+t,kc.chem*4)}
     if(f.el>0){const t=Math.min(dem,P.light[c]);P.light[c]-=t;g+=t*f.el*aff(P.light[c]+t,kc.light*4)}
     if(f.en>0){const t=Math.min(dem,P.nutr[c]);P.nutr[c]-=t;g+=t*f.en*aff(P.nutr[c]+t,kc.nutr*4+.5)}
@@ -905,6 +930,15 @@ function step(quiet){
   let w=0;for(let i=0;i<n;i++)if(!A[i].d)A[w++]=A[i];A.length=w;for(const b of born)A.push(b);if(!quiet)SND.births+=born.length;
   G.secAcc+=DT;if(G.secAcc>=1){G.secAcc-=1;perSecond(quiet)}
 }
+function engTick(){const E=G.eng;if(!E)return;const bld=new Map(),mat=new Map(),tur=new Map();let oxy=0;
+  for(const a of G.agents){const st=G.strains[a.s];if(!st)continue;const f=st.sc.f;const c=a.c;const t=G.tb[c];if(f.oxy)oxy++;
+    const photo=f.oxy||f.anoxy;if(t==='land'&&(f.lichen||f.plant||f.fungus||(photo&&(st.traits.includes('biofilm')||f.colony))))bld.set(c,(bld.get(c)||0)+((f.lichen||f.plant)?2:1));
+    if(t==='tidal'&&photo&&st.traits.includes('biofilm'))mat.set(c,(mat.get(c)||0)+1);
+    if(f.animal&&BIOMES[t].ocean)tur.set(c,(tur.get(c)||0)+1)}
+  let made=0,mc=-1;for(const[c,n]of bld){if(n<4)continue;E.acc[c]+=n>=8?2:1;if(E.acc[c]>=30){G.tb[c]='soil';E.acc[c]=0;made++;mc=c;E.soil++;G.bgDirty=1}}
+  for(const[c,n]of mat)if(n>=5)E.mat[c]=G.t+20;for(const[c,n]of tur)if(n>=3)E.turb[c]=G.t+20;
+  if(made){R_().soil=(R_().soil||0)+made;addMarker(mc,'New soil','#B9D98A',10);if(E.soil===made){logp('ms','Life made soil. Mats, lichens, fungi, or plants broke down bare rock into the first soil: +2 nutrients and less drought there, for any lineage that can reach it.');toast('Life made soil','Bare rock became soil where your world’s life lived. Soil feeds plants and fungi.','wild');sfx('milestone')}}
+  const dd=clamp((oxy-1200)/1500,0,1.5);if(dd>=.3&&(E.draw||0)<.3)logp('ev','Photosynthesis is drawing down CO₂ faster than volcanoes replace it. The climate is cooling: ice ages and snowballs are now more likely.');E.draw=dd}
 function perSecond(quiet){
   refreshCond();
   // oxygen and methane
@@ -927,13 +961,13 @@ function perSecond(quiet){
     if(tot===0){sp.alive=false;sp.diedAt=G.epoch;if(!sp.rival)sfx('extinct');logp(sp.rival?'good':'bad',`${sp.name} went extinct.`);if(sp.rival)G.rivalsExtinct++;continue}
     const d=spDom[id];if(d&&d.id!==sp.dom){if(sp.dom!=null&&d.hl&&d.n>tot*.35&&!quiet){if(!sp.rival)sfx('sweep');const plus=d.traits.filter(t=>!sp.base.includes(t));logp(sp.rival?'rival':'good',`Selective sweep: ${d.code}${plus.length?` (+${TR[plus[plus.length-1]].name})`:''} now dominates ${sp.name}.`)}sp.dom=d.id;}}
   if(quiet)return;
-  addSway(G.sway<40?.5:.12);if(G.mode==='run'&&G.sway>=30)tip('sway');scanOpps();if(G.mode==='run'){if(((G.t|0)&1)===0)naturalCheck();surpriseCheck();winnerCheck();if((G.t|0)%3===0){speciationCheck();speciesSplitCheck()}if((G.t|0)%5===0)achCheck(false)}
+  try{engTick()}catch(e){}addSway(G.sway<40?.5:.12);if(G.mode==='run'&&G.sway>=30)tip('sway');scanOpps();if(G.mode==='run'){if(((G.t|0)&1)===0)naturalCheck();surpriseCheck();winnerCheck();if((G.t|0)%3===0){speciationCheck();speciesSplitCheck()}if((G.t|0)%5===0)achCheck(false)}
   G.histAcc++;if(G.histAcc>=2){G.histAcc=0;const v={};for(const id in G.species)if(G.species[id].alive)v[id]=spTot[id]||0;G.hist.push({t:G.t,v});if(G.hist.length>150)G.hist.shift();UI.chartDirty=true}
   G.o2Warn=G.o2Warn||{};players().forEach(sp=>{const d=domStrain(sp.id);if(!d)return;if(G.o2>d.sc.o2+.35&&G.t-(G.o2Warn[sp.id]||-999)>90){G.o2Warn[sp.id]=G.t;logp('bad',`Oxygen is poisoning ${sp.name} (tolerance ${d.sc.o2}, air ${G.o2.toFixed(1)}). ROS detox or aerobic respiration would protect it; deep water and vents keep O₂ lower.`);flash(`Oxygen is poisoning ${sp.name}. Look for ROS detox in the next draft.`)}});
   checkMs();checkGoal();if(G.sea&&G.t>=G.sea.until)seaRestore();G.bursts=(G.bursts||[]).filter(b=>b.until>G.t);
   G.refuges=G.refuges.filter(r=>r.until>G.t);G.currents=G.currents.filter(r=>r.until>G.t);G.fx=G.fx.filter(fxOn);
   const ev=G.ev;if(ev){if(!ev.rolled&&G.et>=ev.at-10){ev.rolled=rnd()<ev.p?ev.a:ev.b;logp('ev',`Incoming in 10 seconds: ${EV[ev.rolled].name}.`);if(ev.rolled!=='quiet'){tip('event');sfx('warn')}}
-    if(!ev.done&&G.et>=ev.at){ev.done=true;EV[ev.rolled].apply();if(EVSND[ev.rolled])sfx(EVSND[ev.rolled])}}
+    if(!ev.done&&G.et>=ev.at){ev.done=true;EV[ev.rolled].apply();try{if(!G.tut){PROF.codex.events=PROF.codex.events||{};if(!PROF.codex.events[ev.rolled]){PROF.codex.events[ev.rolled]=1;saveProf()}}}catch(e){}if(EVSND[ev.rolled])sfx(EVSND[ev.rolled])}}
   if(!players().length){endRun(false);return}
   if(G.et>=EPOCH_LEN){G.epoch++;if(G.epoch>MAXE){endRun(true)}else beginDraft();}
 }
@@ -948,13 +982,13 @@ const MS={photo:['Oxygenic photosynthesis',40],aerobic:['Aerobic respiration',60
 const MSF={photo:'oxy',aerobic:'aerobic',consort:'consort',swarm:'swarm',euk:'euk',multi:'multi',fungus:'fungus',lichen:'lichen',reef:'reef',icecol:'icecol',plant:'vascular',animal:'bilat'};
 function checkMs(){const got=k=>{if(!G.ms[k]){G.ms[k]=G.epoch;addSway(15);sfx('milestone');logp('ms',`Milestone: ${MS[k][0]} (+${MS[k][1]} score, +15 sway)`);if(k!=='photo'&&k!=='aerobic'){tip('transition')}if(k!=='photo'&&k!=='aerobic')G.cele={label:MS[k][0],t:(typeof performance!=='undefined'?performance.now():0)}}};
   for(const id in G.strains){const s=G.strains[id];if(s.rival||s.n<20)continue;for(const k in MSF)if(s.sc.f[MSF[k]])got(k)}
-  let ln=0;for(const a of G.agents){const b=G.tb[a.c];if((b==='land'||b==='ice')&&!G.strains[a.s].rival)ln++}if(ln>=15)got('land');}
+  let ln=0;for(const a of G.agents){const b=G.tb[a.c];if((b==='land'||b==='soil'||b==='ice')&&!G.strains[a.s].rival)ln++}if(ln>=15)got('land');}
 function scoreParts(){const p=players();let cells=0;for(const id in G.strains)if(!G.strains[id].rival)cells+=G.strains[id].n;const bio=Math.round(cells/8);const ln=p.length*30;let ms=0;for(const k in G.ms)ms+=MS[k][1];const rv=G.rivalsExtinct*50;const gl=(G.goalsDone||0)*60;const sn=(G.speciations||0)*25;const base=bio+ln+ms+rv+gl+sn;const mult=chalMult();return{bio,ln,ms,rv,gl,sn,mult,base,total:Math.round(base*mult),cells}}
 function rank(t){const m=G.ms;if(m.animal||m.plant)return 'Architect of complex life';if(m.reef||m.icecol||m.lichen||m.fungus)return 'Founder of an alien biosphere';if(m.multi)return 'Multicellular pioneer';if(m.euk)return 'Eukaryotic pioneer';return t<200?'Pond scum':t<450?'Microbial mat':'Master of the microbial world'}
 
 /* ---------------- epochs and drafts ---------------- */
 const GRACE_BAN=['impact','snowball','sealow','seahigh','ventdie','volcanic','phage','euxinia'];
-function forecast(){const ids=Object.keys(EV);const ws=ids.map(id=>(G.epoch<=2&&GRACE_BAN.includes(id)?0:1)*(EV[id].open&&G.world==='history'?0:1)*EV[id].w()*(G.mod.evw[id]||1)*(id==='impact'&&G.mod.bombard&&G.epoch<=5?3:1));
+function forecast(){const ids=Object.keys(EV);const ws=ids.map(id=>(G.epoch<=2&&GRACE_BAN.includes(id)?0:1)*(EV[id].open&&G.world==='history'?0:1)*EV[id].w()*(G.mod.evw[id]||1)*(id==='impact'&&G.mod.bombard&&G.epoch<=5?3:1)*((id==='snowball'||id==='iceage')&&G.eng?1+(G.eng.draw||0):1));
   const wp=ex=>{let tot=0;ids.forEach((id,k)=>{if(id!==ex)tot+=ws[k]});let x=rnd()*tot;for(let k=0;k<ids.length;k++){if(ids[k]===ex)continue;x-=ws[k];if(x<=0)return ids[k]}return ids.find(id=>id!==ex)};
   const a=wp(null),b=wp(a);G.ev={a,b,p:Math.round((.55+rnd()*.3)*20)/20,at:Math.round(24+rnd()*22),rolled:null,done:false};}
 function markAerobicShare(){buildBuckets();const info=new Map();
@@ -978,7 +1012,7 @@ function rollWild(d){const r=rnd();const acc=accessory(d);if(r<.3)return{load:pi
   const pool=eligibleFor(d);if(!pool.length)return{load:pick(LOADS)};const ws=pool.map(id=>(TR[id].w||1)*((TR[id].major||TR[id].body)?1.6:1));let x=rnd()*ws.reduce((a,b)=>a+b,0),j=0;while(j<ws.length-1&&x>ws[j]){x-=ws[j];j++}
   const t=pool[j];const m={add:t};if(overFull(d,t)){const ac=accessory(d,t);if(ac.length)m.lose=pick(ac)}return m}
 function swapPhrase(add,lose,foreign){return lose?(foreign?`foreign ${TR[add].name} displaced your ${TR[lose].name} (gain ${TR[add].name}, lose ${TR[lose].name})`:`the ${TR[lose].name} gene mutated into ${TR[add].name} (gain ${TR[add].name}, lose ${TR[lose].name})`):`+${TR[add].name}`}
-function pickCost(t){if(t==='wild')return 0;const x=TR[t];if(!x)return 0;return x.major?20:x.body?14:x.cat==='Metabolism'?8:5}
+function pickCost(t){if(t==='wild')return 0;const x=TR[t];if(!x)return 0;return x.major?15:x.body?10:x.cat==='Metabolism'?6:4}
 function picksOf(dr){return dr.picks&&dr.picks.length?dr.picks:(dr.pick?[dr.pick]:[])}
 function draftCost(){let c=0;for(const id in G.draft){for(const t of picksOf(G.draft[id]))c+=pickCost(t)}return c}
 function modText(m){return m.add?(m.lose?swapPhrase(m.add,m.lose):`+${TR[m.add].name}`):m.lose?`lost ${TR[m.lose].name}`:`a harmful ${TR[m.load].name}`}
@@ -1013,7 +1047,7 @@ function newGoal(){const era=Math.floor((G.epoch-1)/4);if(G.goal&&G.goal.era===e
 function checkGoal(){const g=G.goal;if(!g||g.done)return;if(GOALS[g.id].prog()>=1){g.done=true;G.goalsDone=(G.goalsDone||0)+1;addSway(25);logp('ms',`Era goal complete: ${GOALS[g.id].name} (+60 score, +25 sway).`)}}
 function frontierStrain(spId){let tot=0;const L=[];for(const k in G.strains){const q=G.strains[k];if(q.sp===+spId&&q.n>0){tot+=q.n;L.push(q)}}const thr=Math.max(6,tot*.05);
   const sc=q=>q.traits.filter(t=>TR[t].major||TR[t].body).length*10+q.traits.length-q.loads.length*2;let best=null;for(const q of L){if(q.n<thr)continue;if(!best||sc(q)>sc(best)||(sc(q)===sc(best)&&q.n>best.n))best=q}return best||domStrain(spId)}
-function endRun(win){clearSave();sfx(win?'win':'lose');G.over={win};G.mode='over';if(!G.tut){PROF.runs=(PROF.runs||0)+1;try{PROF.best=Math.max(PROF.best||0,scoreParts().total)}catch(e){}saveProf();achCheck(true)}if(G.opp){G.opp=null;G.oppPrev=0;UI.oppDirty=true}G.refuges=[];G.currents=[];UI.modalDirty=true;UI.toolsDirty=true;UI.draftDirty=true}
+function endRun(win){clearSave();sfx(win?'win':'lose');G.over={win};G.mode='over';if(!G.tut){recordBest();PROF.runs=(PROF.runs||0)+1;try{PROF.best=Math.max(PROF.best||0,scoreParts().total)}catch(e){}saveProf();achCheck(true)}if(G.opp){G.opp=null;G.oppPrev=0;UI.oppDirty=true}G.refuges=[];G.currents=[];UI.modalDirty=true;UI.toolsDirty=true;UI.draftDirty=true}
 function domesticate(){let n=0;for(const k in G.strains){const q=G.strains[k];const i=q.loads.indexOf('L_codon');if(i<0||(q.foreignUntil||0)>G.t+1)continue;q.loads.splice(i,1);q.sc=stats(q);FC.delete(q.id);SPR.delete(q.id);if(!q.rival&&q.n>0)n++}
   if(n)logp('info',`Foreign genes were domesticated in ${n} of your strain${n>1?'s':''}: codon mismatch gone, full effect now.`)}
 function rivalSpeciate(){const R=rivals();if(R.length>=RIVALN+2||G.epoch<3)return;for(const sp of R){if(rnd()>.3)continue;const tot=spCount(sp.id);if(tot<300||G.epoch-(sp.split||0)<3)continue;
@@ -1026,7 +1060,7 @@ function rivalSpeciate(){const R=rivals();if(R.length>=RIVALN+2||G.epoch<3)retur
     sp.split=G.epoch;ns.split=G.epoch;logp('rival',`${sp.name} split in two: an isolated population became a new rival species, ${ns.name}.`);return}}
 function beginDraft(){
   const prevEv=G.ev&&G.ev.done?G.ev.rolled:null;if(G.opp){G.opp=null;if(G.oppPrev){G.speed=G.oppPrev;G.oppPrev=0}UI.oppDirty=true}
-  domesticate();try{seasonTick()}catch(e){}G.dlgMin=false;
+  domesticate();try{seasonTick()}catch(e){}if(G.bgDirty){G.bgDirty=0;try{buildBG()}catch(e){}}G.dlgMin=false;
   G.mode='draft';try{recordAlbum()}catch(e){}try{buildRecap(prevEv)}catch(e){G.recap=null}G.lastEpT0=G.t-G.et;G.et=0;G.chance={loads:0,gains:0,losses:0,hgt:0,natural:[]};G.surprised=false;forecast();markAerobicShare();G.draft={};
   newGoal();
   rivals().forEach(sp=>{const d=frontierStrain(sp.id);if(!d)return;const hand=drawHand(d).filter(t=>t!=='wild');if(!hand.length)return;let t;
@@ -1054,7 +1088,7 @@ function seedMutant(sp,d,t,quiet,at,drop,origin){let targets=[];const mod=typeof
   if(!sp.rival&&mod.add){G.seededT=G.seededT||{};(G.seededT[sp.id]=G.seededT[sp.id]||[]).push(mod.add)}
   if(!quiet)logp('good',`Seeded ${k} mutants of ${ns.code} (${mod.add?'+'+nm:nm}) into ${sp.name}. Selection decides from here.`);
   else if(quiet!=='silent')logp('rival',`${sp.name} threw up a mutant: ${mod.add?'+'+nm:nm}.`);return ns}
-function releaseDraft(){tip('run');const cost=draftCost();if(cost>G.sway+1e-6){for(const id in G.draft){G.draft[id].pick=null;G.draft[id].picks=[]}flash(`Not enough sway: those picks cost ${cost}. Seeding nothing this epoch.`)}else if(cost){G.sway-=cost}if(Object.values(G.draft).some(d=>picksOf(d).length))sfx('seed');
+function releaseDraft(){tip('run');let cost=draftCost();if(cost>G.sway+1e-6){let dropped=0;while(draftCost()>G.sway+1e-6){let bi=null,bt=null,bc=-1;for(const id in G.draft){for(const t of picksOf(G.draft[id])){const c=pickCost(t);if(c>bc){bc=c;bi=id;bt=t}}}if(bi==null)break;const dr=G.draft[bi];dr.picks=picksOf(dr).filter(x=>x!==bt);dr.pick=dr.picks[dr.picks.length-1]||null;dropped++}cost=draftCost();if(dropped)flash(`Not enough sway, so ${dropped} pick${dropped>1?'s were':' was'} dropped.`)}if(cost){G.sway-=cost}if(Object.values(G.draft).some(d=>picksOf(d).length))sfx('seed');
   G.lastPick=G.lastPick||{};G.epTraits={};
   for(const id in G.draft){const dr=G.draft[id];const sp=G.species[id];const L=picksOf(dr);G.lastPick[id]=[];if(L.length&&sp&&sp.alive){const d=G.strains[dr.dom]||domStrain(id);if(!d)continue;
     for(const pk of L){
@@ -1150,7 +1184,7 @@ const TIPS={
  seed:{t:'Choose where to seed',b:'Green patches are where this gene helps, red where it hurts. Click the map to place the mutants, then press Release and run.'},
  run:{t:'Time is running',b:'Use 1×, 3×, 8×, or Space to pause. Ringed cells are new mutants: if they spread, the gene is sweeping. The World tab shows what is coming.'},
  event:{t:'Something is coming',b:'You have 10 seconds. Pick the Refuge tool and click your densest patch: cells inside rarely die, even in catastrophes. Refuges are cheaper if you open them before the warning.'},
- sway:{t:'Sway is ready',b:'Sway refills quickly up to 40, then slowly to 60. It pays for everything: mutation picks (5 for small genes, 20 for big transitions), mid-epoch offers, and tools. Say yes to everything now and you may not afford endosymbiosis later.'},
+ sway:{t:'Sway is ready',b:'Sway refills quickly up to 40, then slowly to 60. It pays for everything: mutation picks (4 for small genes, 15 for big transitions), mid-epoch offers, and tools. Say yes to everything now and you may not afford endosymbiosis later.'},
  opportunity:{t:'An opportunity',b:'Opportunities pop up when something happens in the simulation. Time slows while you decide. Ignoring one is always allowed.'},
  wild:{t:'A wild card',b:'The dice card is a random mutation you only see after release: often a new gene (sometimes a big one), sometimes a harmful load, sometimes a gene loss. Higher mutation rates deal more of them.'},
  genome:{t:'Your genome is full',b:'Prokaryotes can only afford a few accessory genes. Picking a new one means dropping an old one; the card shows what it would replace, and you can change it below the cards. Endosymbiosis and multicellularity add slots.'},
@@ -1184,7 +1218,7 @@ function buildRecap(prevEv){const E=G.epoch-1;if(E<1){G.recap=null;return}const 
   G.recap={e:E,ev:prevEv,rows,lines,chance}}
 function recapHTML(){const r=G.recap;if(!r)return '';
   return `<div class="recap"><div class="eyebrow">Last epoch${r.ev?` · ${EV[r.ev].name}`:''}</div>${r.rows.map(x=>{const a=x.a==null?null:x.a;const d=a==null?'':x.b-a;const pct=a?Math.round((x.b-a)/a*100):0;return `<div class="rrow2"><i class="dot" style="background:${x.color}"></i><i class="sp">${esc(x.name)}</i><span class="mono">${a==null?'':a+' → '}${x.b}</span>${a!=null?`<b class="mono ${d>=0?'w-good':'w-bad'}">${d>=0?'+':''}${pct}%</b>`:''}</div>`}).join('')}
-   ${r.lines.length?`<ul>${r.lines.map(x=>`<li class="t-${x.t}">${esc(x.m)}</li>`).join('')}</ul>`:'<p class="why">A quiet epoch for your lineage.</p>'}${r.chance&&r.chance.length?`<div class="chance"><div class="eyebrow">🎲 What chance did</div><ul>${r.chance.map(x=>`<li class="c-${x.k}">${esc(x.m)}</li>`).join('')}</ul></div>`:''}</div>`}
+   ${r.lines.length?`<ul>${r.lines.map(x=>`<li class="t-${x.t}">${esc(x.m)}</li>`).join('')}</ul>`:'<p class="why">A quiet epoch for your lineage.</p>'}${sciNotes()}${r.chance&&r.chance.length?`<div class="chance"><div class="eyebrow">🎲 What chance did</div><ul>${r.chance.map(x=>`<li class="c-${x.k}">${esc(x.m)}</li>`).join('')}</ul></div>`:''}</div>`}
 
 /* ---------------- chance: natural picks, surprises, toasts ---------------- */
 function traitFreq(spId){const cnt={};let tot=0;for(const k in G.strains){const q=G.strains[k];if(q.sp!==+spId||!q.n)continue;tot+=q.n;for(const t of q.traits)cnt[t]=(cnt[t]||0)+q.n}return{cnt,tot}}
@@ -1315,6 +1349,8 @@ const ACH=[
  {id:'anoxic',t:'g',n:'Never breathed',d:'Reach multicellularity on a reducing (oxygen-free) world.',test:()=>G.ms.multi&&G.planet==='anoxic'},
  {id:'earth',t:'g',n:'Earth historian',d:'Finish Earth history mode with 3 or more stars.',end:1,test:()=>G.world==='history'&&stars()>=3},
  {id:'handsoff',t:'g',n:'Hands off',d:'Reach multicellularity without using a tool or accepting an offer.',test:()=>G.ms.multi&&!(R_().aid)},
+ {id:'terra',t:'g',n:'Terraformer',d:'Have life turn 10 patches of bare rock into soil in one run.',prog:()=>[(R_().soil||0),10],test:()=>(R_().soil||0)>=10},
+ {id:'daily5',t:'s',n:'Creature of habit',d:'Finish 5 daily worlds.',prog:()=>[Object.keys((PROF.daily||{}).played||{}).length,5],test:()=>Object.keys((PROF.daily||{}).played||{}).length>=5},
  {id:'twilight',t:'g',n:'Twilight dweller',d:'Reach multicellularity on a tidally locked world.',test:()=>G.ms.multi&&G.planet==='locked'},
  {id:'tour',t:'g',n:'World tour',d:'Play on all nine planet types.',prog:()=>[Object.keys(PROF.codex.planets||{}).length,Object.keys(PLANETS).length],test:()=>Object.keys(PROF.codex.planets||{}).length>=Object.keys(PLANETS).length},
  {id:'dark',t:'p',n:'Lights out',d:'Become a eukaryote on a rogue planet, with no sunlight at all.',test:()=>G.ms.euk&&G.planet==='rogue'},
@@ -1352,6 +1388,65 @@ function achPanelHTML(){const p=profPts();const r=rankOf(p),nx=nextRank(p);const
    <div class="eyebrow">Codex</div><p class="why">${Object.keys(PROF.codex.genes).length} of ${Object.keys(TR).filter(k=>!TR[k].load).length} genes carried · ${PROF.runs||0} runs · best score ${PROF.best||0}</p><div class="cxrow">${cf}</div>
    ${tiers}<div class="btnrow"><button class="btn ghost" data-act="t-back">Back</button></div>`}
 function chalSetupHTML(){const any=Object.keys(CHAL).some(chalUnlocked);return `<div class="chalbox"><div class="eyebrow">Challenges ${any?`· score ×${chalMult().toFixed(2)}`:''}</div><div class="chals">${Object.entries(CHAL).map(([k,c])=>{const u=chalUnlocked(k);return `<button class="chal" data-act="chal" data-v="${k}" aria-pressed="${!!(G.chal&&G.chal[k])}" ${u?'':'disabled'} title="${esc(c.desc)}">${u?'':'🔒 '}${c.name} <span class="mono">+${Math.round(c.mult*100)}%</span></button>`}).join('')}</div>${any?'':'<p class="why">Earn achievement points to unlock harder challenges with score bonuses. See Achievements on the title screen.</p>'}</div>`}
+
+/* ---------------- chronicle: a shareable image of the run ---------------- */
+function chronPush(t,m){if(!G||G.tut)return;if(t==='ms'&&/^Achievement/.test(m))return;if(t==='ev'&&!/Snowball|Impact|Flood basalts|oxygenation|Great Oxidation|ice age|warm age/i.test(m))return;if(t==='bad'&&!/went extinct/.test(m))return;if(t!=='ms'&&t!=='ev'&&t!=='bad')return;
+  const r=R_();r.chron=r.chron||[];let txt=m.replace(/\s*\(\+\d+ score.*$/,'').split(/(?<=\.)\s/)[0];if(txt.length>92)txt=txt.slice(0,90)+'…';r.chron.push({e:G.epoch,t,m:txt});if(r.chron.length>40)r.chron.splice(8,1)}
+function wrapText(c,txt,x,y,maxW,lh,maxLines){const words=String(txt).split(' ');let line='',n=0;for(const w of words){const t=line?line+' '+w:w;if(c.measureText(t).width>maxW&&line){c.fillText(line,x,y);y+=lh;n++;line=w;if(maxLines&&n>=maxLines-1){c.fillText((line+' '+words.slice(words.indexOf(w)+1).join(' ')).slice(0,60)+'…',x,y);return y+lh}}else line=t}if(line){c.fillText(line,x,y);y+=lh}return y}
+function makeChronicle(){const Wc=1080,Hc=1500;const cn=mk(Wc,Hc),c=cn.getContext('2d');const sc=scoreParts();const P=PLANETS[G.planet];
+  const g=c.createLinearGradient(0,0,0,Hc);g.addColorStop(0,'#10303A');g.addColorStop(1,'#060E13');c.fillStyle=g;c.fillRect(0,0,Wc,Hc);
+  c.fillStyle='#E99A6B';c.font='700 34px Unbounded, Trebuchet MS, sans-serif';c.fillText('Deep Time',60,82);
+  c.fillStyle='#93AAA6';c.font='600 22px Figtree, sans-serif';c.textAlign='right';c.fillText(`World ${shareCode()}`,Wc-60,80);c.textAlign='left';
+  const L=players();const main=L[0]||Object.values(G.species).find(q=>!q.rival);c.fillStyle='#E3ECE7';c.font='italic 700 52px Figtree, sans-serif';c.fillText(main?main.name:'Extinct lineage',60,160);
+  c.font='500 24px Figtree, sans-serif';c.fillStyle='#B9CCC8';c.fillText(`${G.world==='history'?'Earth history':P.name} · ${ARCH[G.arch].name} · ${MAXE} epochs${G.gx>40?' · large world':''}`,60,200);
+  const n=stars();c.font='40px sans-serif';for(let i=0;i<5;i++){c.fillStyle=i<n?'#FFD76A':'#2E5460';c.fillText('★',60+i*46,262)}
+  c.fillStyle='#E3ECE7';c.font='700 46px Unbounded, Trebuchet MS, sans-serif';c.textAlign='right';c.fillText(String(sc.total),Wc-60,262);c.font='500 20px Figtree, sans-serif';c.fillStyle='#93AAA6';c.fillText(rank(sc.total),Wc-60,292);c.textAlign='left';
+  // map
+  const mx=60,my=320,mw=Wc-120,mh=Math.round(mw*H/W);c.save();rr(c,mx,my,mw,mh,18);c.clip();c.drawImage(BG,mx,my,mw,mh);
+  for(const a of G.agents){const st=G.strains[a.s];if(!st)continue;c.fillStyle=st.rival?'rgba(200,215,215,.45)':strainColor(st,.95);const r=st.rival?1.6:2.6;c.beginPath();c.arc(mx+a.x/W*mw,my+a.y/H*mh,r,0,6.283);c.fill()}c.restore();
+  c.strokeStyle='rgba(134,211,227,.35)';c.lineWidth=2;rr(c,mx,my,mw,mh,18);c.stroke();
+  // forms over time
+  let y=my+mh+56;c.fillStyle='#93AAA6';c.font='700 18px Figtree, sans-serif';c.fillText('HOW IT EVOLVED',60,y);y+=20;
+  const al=(main&&main.album)||[];const pickA=al.length<=6?al:[0,1,2,3,4,5].map(i=>al[Math.round(i*(al.length-1)/5)]);const cw=Math.min(240,(Wc-120)/Math.max(1,pickA.length));const ox=60+((Wc-120)-cw*pickA.length)/2;
+  pickA.forEach((a,i)=>{const sc2=stats({traits:a.traits,loads:a.loads,tmin:a.tmin,tmax:a.tmax});const o={f:sc2.f,s:sc2,traits:a.traits,h:a.h,sat:a.sat,seed:(main.id*7919+(G.seed%997))|0};const cx=ox+cw*i+cw/2,cy=y+80;
+    c.fillStyle='rgba(23,49,57,.7)';rr(c,ox+cw*i+6,y,cw-12,170,14);c.fill();try{paintOrganism(c,o,cx,cy,bodyType(sc2.f)==='prok'?24:30,0,true)}catch(e){}
+    c.fillStyle='#E3ECE7';c.font='600 16px Figtree, sans-serif';c.textAlign='center';c.fillText(formName(o).slice(0,22),cx,y+148);c.fillStyle='#93AAA6';c.fillText('Epoch '+a.e,cx,y+166);c.textAlign='left'});
+  y+=210;
+  // timeline
+  c.fillStyle='#93AAA6';c.font='700 18px Figtree, sans-serif';c.fillText('KEY MOMENTS',60,y);y+=34;const ch=(R_().chron||[]).slice(0,14);c.font='500 20px Figtree, sans-serif';
+  if(!ch.length){c.fillStyle='#B9CCC8';c.fillText('A quiet history: no milestones this time.',60,y);y+=30}
+  for(const k of ch){if(y>Hc-110)break;c.fillStyle=k.t==='ms'?'#FFD76A':k.t==='bad'?'#EA7A5E':'#86D3E3';c.font='700 18px JetBrains Mono, monospace';c.fillText('E'+k.e,60,y);c.fillStyle='#E3ECE7';c.font='500 20px Figtree, sans-serif';y=wrapText(c,k.m,130,y,Wc-190,26,2)+6}
+  const Hf=Math.max(1000,Math.min(Hc,y+110));const out=mk(Wc,Hf),o2=out.getContext('2d');o2.drawImage(cn,0,0);
+  o2.fillStyle='rgba(134,211,227,.12)';o2.fillRect(0,Hf-80,Wc,80);o2.fillStyle='#E3ECE7';o2.font='600 24px Figtree, sans-serif';o2.fillText(`Can you beat it? Load world ${shareCode()} in Deep Time.`,60,Hf-32);
+  return out}
+let CHRONC=null;
+async function saveChronicle(){if(!CHRONC)return;const name=`deep-time-${shareCode()}.png`;const blob=await new Promise(r=>CHRONC.toBlob(r,'image/png'));if(!blob){flash('Could not create the image.');return}
+  let dl=null;try{if(window.claude&&window.claude.use)dl=await window.claude.use('downloads')}catch(e){}
+  if(dl){try{await dl.save({filename:name,data:blob});flash('Chronicle saved.')}catch(e){if(e&&e.code==='declined')return;flash('Saving isn’t available here. Press and hold (or right-click) the image to save it.')}return}
+  try{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000)}catch(e){flash('Press and hold (or right-click) the image to save it.')}}
+function showChronicle(){let url='';try{CHRONC=makeChronicle();url=CHRONC.toDataURL('image/png')}catch(e){flash('Could not draw the chronicle.');return}const el=document.getElementById('chron');
+  el.innerHTML=`<div class="chroncard"><div class="btnrow" style="justify-content:space-between"><b>Your chronicle</b><span class="btnrow"><button class="btn sm" data-act="chronsave">⬇ Save image</button><button class="btn ghost sm" data-act="chronclose">Close</button></span></div><img src="${url}" alt="Chronicle of this run"><p class="why">You can also press and hold (or right-click) the image to save or share it.</p></div>`;el.hidden=false}
+
+/* ---------------- field guide and classroom mode ---------------- */
+let CLASS_ON=false;try{CLASS_ON=localStorage.getItem('deeptime_class')==='1'}catch(e){}
+function guideHTML(){const seen=PROF.codex.genes||{},evs=PROF.codex.events||{};const ids=Object.keys(TR).filter(k=>!TR[k].load);const cats=[...new Set(ids.map(k=>TR[k].cat))];
+  const gcard=k=>{const t=TR[k];if(!seen[k])return `<div class="gg off"><b>???</b><small>${t.cat} · not yet carried</small></div>`;return `<details class="gg"><summary><b>${t.name}</b> <span class="mono muted">${esc(t.locus||'')}</span></summary><ul>${(t.pros||[]).map(p=>`<li class="p">${p}</li>`).join('')}${(t.cons||[]).map(p=>`<li class="c">${p}</li>`).join('')}</ul><p class="why">${t.sci}</p></details>`};
+  const evk=Object.keys(EV);return `<h2>Field guide</h2><p class="why">Every gene your lineages have carried and every event you have lived through, with the real biology behind it. ${Object.keys(seen).filter(k=>TR[k]&&!TR[k].load).length} of ${ids.length} genes · ${Object.keys(evs).length} of ${evk.length} events.</p>
+   ${cats.map(c=>`<div class="eyebrow">${c}</div><div class="gglist">${ids.filter(k=>TR[k].cat===c).sort((x,y)=>(seen[y]?1:0)-(seen[x]?1:0)).map(gcard).join('')}</div>`).join('')}
+   <div class="eyebrow">Planetary events</div><div class="gglist">${evk.map(k=>evs[k]?`<details class="gg"><summary><b>${EV[k].name}</b></summary><p>${EV[k].fxt||''}</p><p class="why">${EV[k].sci}</p></details>`:`<div class="gg off"><b>???</b><small>not yet seen</small></div>`).join('')}</div>
+   <div class="btnrow"><button class="btn ghost" data-act="t-back">Back</button></div>`}
+function sciNotes(){if(!CLASS_ON||!G.recap)return '';const r=G.recap;const out=[];if(r.ev&&EV[r.ev])out.push(`<b>${EV[r.ev].name}.</b> ${EV[r.ev].sci}`);
+  for(const sp of players()){for(const lp of [].concat((G.lastPick||{})[sp.id]||[])){if(lp&&lp.t&&TR[lp.t]&&lp.e===r.e)out.push(`<b>${TR[lp.t].name}.</b> ${TR[lp.t].sci}`)}}
+  return out.length?`<div class="scinote"><div class="eyebrow">🔬 Science note</div>${out.slice(0,3).map(x=>`<p>${x}</p>`).join('')}</div>`:''}
+function buildQuiz(){const R=mulberry((G.seed^0x5bd1e995)>>>0);const pk=a=>a[Math.floor(R()*a.length)];const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+  const pool=Object.keys(TR).filter(k=>!TR[k].load&&(TR[k].pros||[]).length);const mine=[...new Set(Object.values(G.strains).filter(s=>!s.rival&&s.n>0).flatMap(s=>s.traits))].filter(k=>pool.includes(k));
+  const Q=[];const used=new Set();
+  const g1=mine.filter(k=>!used.has(k));if(g1.length){const k=pk(g1);used.add(k);const opts=shuf([k,...shuf(pool.filter(x=>x!==k&&TR[x].cat!==TR[k].cat)).slice(0,3)]);Q.push({q:`Which gene does this? “${TR[k].pros[0]}”`,opts:opts.map(x=>TR[x].name),a:opts.indexOf(k),why:TR[k].sci})}
+  const g2=mine.filter(k=>!used.has(k)&&(TR[k].cons||[]).length);if(g2.length){const k=pk(g2);used.add(k);const others=shuf(pool.filter(x=>x!==k&&(TR[x].cons||[]).length)).slice(0,3);const opts=shuf([k,...others]);Q.push({q:`Your lineage carried ${TR[k].name}. What was its cost?`,opts:opts.map(x=>TR[x].cons[0]),a:opts.indexOf(k),why:TR[k].sci})}
+  const seenEv=Object.keys(PROF.codex.events||{});const ek=(G.recap&&G.recap.ev)||pk(seenEv.length?seenEv:Object.keys(EV));if(EV[ek]){const opts=shuf([ek,...shuf(Object.keys(EV).filter(x=>x!==ek&&x!=='quiet')).slice(0,3)]);Q.push({q:`Which event matches this? “${EV[ek].sci}”`,opts:opts.map(x=>EV[x].name),a:opts.indexOf(ek),why:EV[ek].fxt||''})}
+  G.quiz={q:Q,ans:Q.map(()=>null)}}
+function quizHTML(){if(!CLASS_ON)return '';if(!G.quiz)buildQuiz();const Z=G.quiz;if(!Z.q.length)return '';const right=Z.ans.filter((a,i)=>a===Z.q[i].a).length,done=Z.ans.every(a=>a!=null);
+  return `<div class="quiz"><div class="eyebrow">🔬 Quick check${done?` · ${right} of ${Z.q.length}`:''}</div>${Z.q.map((q,i)=>`<div class="qq"><p><b>${i+1}.</b> ${esc(q.q)}</p><div class="qopts">${q.opts.map((o,j)=>{const a=Z.ans[i];const cls=a==null?'':j===q.a?'ok':j===a?'no':'';return `<button class="qo ${cls}" data-act="quiz" data-q="${i}" data-o="${j}" ${a!=null?'disabled':''}>${esc(o)}</button>`}).join('')}</div>${Z.ans[i]!=null?`<p class="why">${Z.ans[i]===q.a?'Correct. ':'Not quite. '}${esc(q.why)}</p>`:''}</div>`).join('')}</div>`}
 
 /* ---------------- sound (synthesized with Web Audio) ---------------- */
 const SND={on:true,ctx:null,master:null,wet:null,amb:null,last:{},births:0};
@@ -1430,7 +1525,7 @@ function rebuildMap(){refreshCond();if(typeof buildBG==='function'&&BG)buildBG()
 function seaShift(dir,dur){const tb=[...G.tb],ch=[];const oc=c=>BIOMES[tb[c]].ocean;
   for(let c=0;c<NC;c++){const b=tb[c];let nb=null;
     if(dir<0){if(b==='shallow'&&nb4(c).some(q=>!oc(q)))nb='tidal';else if(b==='tidal')nb='land'}
-    else{if(b==='tidal')nb='shallow';else if(b==='land'&&nb4(c).some(q=>tb[q]==='tidal'||oc(q)))nb='tidal'}
+    else{if(b==='tidal')nb='shallow';else if((b==='land'||b==='soil')&&nb4(c).some(q=>tb[q]==='tidal'||oc(q)))nb='tidal'}
     if(nb){ch.push([c,b]);G.tb[c]=nb}}
   G.sea={until:G.t+dur,ch,dir};rebuildMap();logp('ev',dir<0?`Sea level fell: ${ch.length} coastal patches changed. Shallow-water life is stranded.`:`Sea level rose: ${ch.length} coastal patches flooded.`)}
 function seaRestore(){if(!G.sea)return;for(const[c,b]of G.sea.ch)G.tb[c]=b;G.sea=null;rebuildMap();logp('ev','Sea level returned to normal.')}
@@ -1461,7 +1556,7 @@ function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;r
 /* ---------------- terrain painter: organic coastlines, depth, polar ice, vent fissures ---------------- */
 function hnoise(seed){const h=(x,y)=>{let n=(x*374761393+y*668265263+seed*1442695041)|0;n=(n^(n>>>13))*1274126177|0;return((n^(n>>>16))>>>0)/4294967296};
   const sm=t=>t*t*(3-2*t);return(x,y)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=sm(x-xi),yf=sm(y-yi);const a=h(xi,yi),b=h(xi+1,yi),c=h(xi,yi+1),d=h(xi+1,yi+1);return a+(b-a)*xf+(c-a)*yf+(a-b-c+d)*xf*yf}}
-const TCOL={deep:[16,46,74],vent:[30,34,52],shallow:[40,142,152],tidal:[156,138,96],land:[104,94,84],spring:[150,108,56],ice:[218,230,238],brine:[92,150,172]};
+const TCOL={soil:[78,84,46],deep:[16,46,74],vent:[30,34,52],shallow:[40,142,152],tidal:[156,138,96],land:[104,94,84],spring:[150,108,56],ice:[218,230,238],brine:[92,150,172]};
 function paintTerrain(){const R=2,pw=Math.ceil(W/R),ph=Math.ceil(H/R);const cnv=mk(pw,ph),x=cnv.getContext('2d');const img=x.createImageData(pw,ph);const D=img.data;
   const n1=hnoise(G.seed%100003),n2=hnoise((G.seed*7+13)%100003),n3=hnoise((G.seed*3+5)%100003);const cls=new Uint8Array(pw*ph);const pl=PLANETS[G.planet];
   const distAt=(gx,gy)=>{const x0=clamp(Math.floor(gx-.5),0,GX-1),y0=clamp(Math.floor(gy-.5),0,GY-1),x1=Math.min(GX-1,x0+1),y1=Math.min(GY-1,y0+1);const fx=clamp(gx-.5-x0,0,1),fy=clamp(gy-.5-y0,0,1);const d=(a,b)=>Math.min(14,G.dist[b*GX+a]);return d(x0,y0)*(1-fx)*(1-fy)+d(x1,y0)*fx*(1-fy)+d(x0,y1)*(1-fx)*fy+d(x1,y1)*fx*fy};
@@ -1506,7 +1601,7 @@ function camClamp(){CAM.z=clamp(CAM.z,1,4);CAM.x=clamp(CAM.x,0,W-W/CAM.z);CAM.y=
 function camReset(){CAM.z=1;CAM.x=0;CAM.y=0;camClamp()}
 function camZoom(f,wx,wy){const z0=CAM.z;const z1=clamp(z0*f,1,4);if(wx==null){wx=CAM.x+W/z0/2;wy=CAM.y+H/z0/2}CAM.x=wx-(wx-CAM.x)*z0/z1;CAM.y=wy-(wy-CAM.y)*z0/z1;CAM.z=z1;camClamp()}
 function camCenter(wx,wy){CAM.x=wx-W/CAM.z/2;CAM.y=wy-H/CAM.z/2;camClamp()}
-function mmRect(){const s=cv.width/(cv.clientWidth||1);const w=Math.min(170,(cv.clientWidth||300)*.26)*s,h=w*H/W;return{x:10*s,y:52*s,w,h,s}}
+function mmRect(){const s=cv.width/(cv.clientWidth||1);const w=Math.min(170,(cv.clientWidth||300)*.26)*s,h=w*H/W;return{x:10*s,y:cv.height-h-46*s,w,h,s}}
 function drawScreenUI(tnow){if(CAM.z<=1.02&&!G.opp)return;ctx.setTransform(1,0,0,1,0,0);const s=cv.width/(cv.clientWidth||1);
   if(CAM.z>1.02){const m=mmRect();ctx.globalAlpha=.92;ctx.fillStyle='rgba(6,14,20,.85)';ctx.fillRect(m.x-2*s,m.y-2*s,m.w+4*s,m.h+4*s);ctx.drawImage(BG,m.x,m.y,m.w,m.h);
     ctx.fillStyle='rgba(255,255,255,.75)';for(let i=0;i<G.agents.length;i+=3){const a=G.agents[i];const st=G.strains[a.s];if(!st||st.rival)continue;ctx.fillRect(m.x+a.x/W*m.w,m.y+a.y/H*m.h,1.5*s,1.5*s)}
@@ -1751,6 +1846,7 @@ function draw(dtReal){
   // refuges
   for(const r of G.refuges){if(r.until<=G.t)continue;const left=r.until-G.t;const a=Math.min(1,left/3);ctx.fillStyle=`rgba(134,211,227,${.09*a})`;ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,6.283);ctx.fill();
     ctx.save();ctx.strokeStyle=`rgba(134,211,227,${.75*a})`;ctx.lineWidth=1.5;ctx.setLineDash([6,5]);ctx.lineDashOffset=-tnow*12;ctx.stroke();ctx.restore();}
+  if(G.eng){const E=G.eng;for(let c=0;c<NC;c++){const x=c%GX*GC,y=Math.floor(c/GX)*GC;if(E.mat[c]>G.t){ctx.fillStyle='rgba(90,170,80,.16)';ctx.fillRect(x+2,y+2,GC-4,GC-4)}if(E.turb[c]>G.t){ctx.fillStyle='rgba(170,140,90,.13)';ctx.fillRect(x+3,y+3,GC-6,GC-6)}if(G.bgDirty&&G.tb[c]==='soil'){ctx.fillStyle='rgba(90,100,50,.55)';ctx.beginPath();ctx.arc(x+GC/2,y+GC/2,GC*.55,0,6.283);ctx.fill()}}}
   // currents
   for(const c of G.currents){if(c.until<=G.t)continue;drawCurrent(c.x1,c.y1,c.x2,c.y2,Math.min(1,(c.until-G.t)/3),tnow)}
   if(G.mode==='draft'){const ov=hypOverlay();if(ov){for(let c=0;c<NC;c++){const w=ov[c];if(!w)continue;ctx.fillStyle=w>0?`rgba(147,211,138,${.12+w*.22})`:`rgba(234,122,94,${.1+(-w)*.2})`;ctx.fillRect(c%GX*GC+1,Math.floor(c/GX)*GC+1,GC-2,GC-2)}}
@@ -1834,7 +1930,7 @@ function worldInfoHTML(){const A=ARCH[G.arch];const P=PLANETS[G.planet];const d=
 function optsSummary(){return `${WSIZE==='large'?'Large world · ':''}${MAXE} epochs · ${RIVALN} rival${RIVALN>1?'s':''} · ${G.world==='history'?'Earth history':PLANET_PICK?PLANETS[PLANET_PICK].name:'random planet'}${nChal()?` · ${nChal()} challenge${nChal()>1?'s':''}`:''}`}
 function setupStep1(){return `${resumeHTML()}<div class="card draft">${setupHead()}${worldInfoHTML()}
   <details class="opts"><summary><span class="eyebrow">Game options</span> <span class="why">${optsSummary()}</span></summary><div class="optsbody">${modeToggle()}</div></details>
-  <div class="codebox"><div><div class="eyebrow">World code</div><div class="bigcode">${shareCode()}</div></div><div class="btnrow"><button class="btn ghost sm" data-act="copycode">Copy code</button><button class="btn ghost sm" data-act="reroll">🎲 Roll a new world</button></div></div>
+  <div class="codebox"><div><div class="eyebrow">${G.daily?`Daily world · ${G.daily}`:'World code'}</div><div class="bigcode">${shareCode()}</div>${bestFor(shareCode())!=null?`<p class="why">Your best on this world: <b>${bestFor(shareCode())}</b></p>`:''}</div><div class="btnrow"><button class="btn ghost sm" data-act="copycode">Copy code</button><button class="btn ghost sm" data-act="reroll">🎲 Roll a new world</button></div></div>
   <form class="codeform" id="codeform"><label class="eyebrow" for="codein">Play a friend’s world</label><div class="btnrow"><input id="codein" placeholder="e.g. K7M-3QX-B2CF" maxlength="16" autocomplete="off" spellcheck="false"><button class="btn ghost sm" type="submit">Load</button></div>${G.codeErr?`<p class="why" style="color:var(--bad)">${esc(G.codeErr)}</p>`:''}</form>
   <div class="btnrow sonext"><button class="btn big" data-act="sstep" data-v="2">Next: ${G.world==='history'?'choose your start':'choose your founder'} ▶</button></div></div>`}
 function setupStep2Open(){return `<div class="card draft">${setupHead()}<h2>Pick the first life on ${esc(PLANETS[G.planet].name.toLowerCase())}</h2><p class="why">Each founder starts wherever its genes fit best; its ring on the map shows where. <b>Growth</b> above 1 means it can grow; <b>Room</b> is how many cells the area can feed. Tap a card, or tap a ring on the map.</p>
@@ -1873,7 +1969,7 @@ function mapNoteHTML(){if((G.sstep||1)===1)return `<span class="lgb" style="--c:
 function worldCardHTML(){const P=PLANETS[G.planet];const d=PDIFF[G.planet]||1;return `<details class="wcard"><summary><span class="eyebrow">This world · ${shareCode()}</span> <b>${G.world==='history'?'Earth':P.name}</b> <span class="why">${ARCH[G.arch].name}${G.world==='history'?'':` · difficulty ${'●'.repeat(d)}${'○'.repeat(5-d)}`}</span></summary><div class="optsbody">${G.world!=='history'?`<p class="why">${P.desc}</p>`:''}<div class="wtraits">${G.traits.map(k=>`<div><b>${WTRAITS[k].name}</b> <span>${WTRAITS[k].fx}</span></div>`).join('')}</div></div></details>`}
 function renderWorldCard(){const el=document.getElementById('worldinfo');if(!el)return;if(!G||G.mode==='setup'){el.hidden=true;return}const k=G.code+G.planet+G.world;if(el._k!==k){el._k=k;el.innerHTML=worldCardHTML()}el.hidden=false}
 function renderDraft(){const el=$('#draft');if(G.mode==='setup'){el.innerHTML=renderSetup();return}
-  if(G.mode==='over'){const sc=scoreParts();el.innerHTML=`<div class="card draft"><div class="eyebrow">${G.over&&G.over.win?'Run complete':'Extinction'} · world ${G.code}</div><h2>${starHTML()} Score ${sc.total}</h2><p class="why">${rank(sc.total)}. ${starHint(stars())}</p><div class="btnrow"><button class="btn" data-act="showend">See results</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="newgame">New world</button></div></div>`;return}
+  if(G.mode==='over'){const sc=scoreParts();el.innerHTML=`<div class="card draft"><div class="eyebrow">${G.over&&G.over.win?'Run complete':'Extinction'} · world ${G.code}</div><h2>${starHTML()} Score ${sc.total}</h2><p class="why">${rank(sc.total)}. ${starHint(stars())}</p><div class="btnrow"><button class="btn" data-act="showend">See results</button><button class="btn ghost" data-act="chron">📜 Chronicle</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="newgame">New world</button></div></div>`;return}
   if(G.mode!=='draft'){el.innerHTML='';return}
   const ids=Object.keys(G.draft);let cur=G.draft[G.sel]?G.sel:+ids[0];const sp=G.species[cur];const dr=G.draft[cur];
   let h=`<div class="card draft"><div class="eyebrow">Epoch ${G.epoch} of ${MAXE} · ${timeStr(G.epoch)} · time is stopped</div>${recapHTML()}<h2>Seed a mutation</h2>`;
@@ -1945,12 +2041,14 @@ function renderLog(){const items=G.log.slice(-18).reverse();$('#log').innerHTML=
 function renderModal(){const m=$('#modal');if(G.mode!=='over'||G.ui_closedEnd){m.hidden=true;m.innerHTML='';return}
   const sc=scoreParts(),win=G.over.win;
   m.innerHTML=`<div class="mcard" role="dialog" aria-modal="true" aria-label="Results"><div class="eyebrow">${win?(G.world==='history'?'0.54 Gya · The Cambrian begins':`${timeStr(MAXE+1)} · The run is complete`):'Extinction'}</div><h2>${win?(G.world==='history'?'Your descendants inherit the Cambrian.':'Your lineage endured.'):'Your last species is gone.'}</h2>
+  ${G.prevBest==null?'':sc.total>G.prevBest?`<div class="newbest">New best on this world! (previous ${G.prevBest})</div>`:`<p class="why">Your best on this world: ${G.prevBest}</p>`}${G.daily?`<p class="why">Daily world ${G.daily}${(PROF.daily||{}).streak>1?` · streak ${(PROF.daily||{}).streak} days`:''}</p>`:''}
   <div><div class="score">${sc.total}</div><div style="font-size:26px">${starHTML()}</div><p class="muted">${rank(sc.total)} · ${starHint(stars())}</p></div>
   ${(G.newAch||[]).length?`<div class="endach"><div class="eyebrow">Achievements this run</div>${G.newAch.map(id=>{const a=ACH.find(x=>x.id===id);return a?`<span class="medalchip" style="--c:${TIERS[a.t].col}">★ ${a.n}</span>`:''}).join('')}</div>`:''}
+  ${quizHTML()}
   <table class="ptable"><tr><td>Biomass (${sc.cells} cells ÷ 8)</td><td class="mono">${sc.bio}</td></tr><tr><td>Living species × 30</td><td class="mono">${sc.ln}</td></tr><tr><td>Milestones</td><td class="mono">${sc.ms}</td></tr><tr><td>Rivals driven extinct × 50</td><td class="mono">${sc.rv}</td></tr><tr><td>Era goals × 60</td><td class="mono">${sc.gl}</td></tr><tr><td>New species evolved × 25</td><td class="mono">${sc.sn||0}</td></tr>${sc.mult>1?`<tr><td>Challenge bonus × ${sc.mult.toFixed(2)}</td><td class="mono">+${sc.total-sc.base}</td></tr>`:''}</table>
   <h4>What evolved</h4><ul>${Object.values(G.species).filter(sp=>!sp.rival).map(sp=>{const d=sp.alive?domStrain(sp.id):null;return `<li><i class="sp">${esc(sp.name)}</i>: ${d?formName(orgOf(d)):'extinct'}</li>`}).join('')}</ul>
   <h4>Milestones</h4><ul>${Object.keys(MS).map(k=>`<li class="${G.ms[k]?'t-ms':'muted'}">${MS[k][0]} ${G.ms[k]?`· epoch ${G.ms[k]} (+${MS[k][1]})`:'· not reached'}</li>`).join('')}</ul>
-  <p class="why">World ${shareCode()} · ${ARCH[G.arch].name} · ${G.traits.map(k=>WTRAITS[k].name).join(', ')}</p><div class="btnrow"><button class="btn" data-act="newgame">Roll a new world</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="closeend">Look at the map</button></div></div>`;m.hidden=false;}
+  <p class="why">World ${shareCode()} · ${ARCH[G.arch].name} · ${G.traits.map(k=>WTRAITS[k].name).join(', ')}</p><div class="btnrow"><button class="btn" data-act="newgame">Roll a new world</button><button class="btn ghost" data-act="chron">📜 Chronicle</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="closeend">Look at the map</button></div></div>`;m.hidden=false;}
 
 /* ---------------- input ---------------- */
 /* ---------------- title screen ---------------- */
@@ -1969,23 +2067,26 @@ function drawTitle(dt){const cv=document.getElementById('titlecv');if(!cv)return
     c.save();c.globalAlpha=.25+.55*q.z;c.shadowColor=`hsla(${q.o.h},70%,60%,.5)`;c.shadowBlur=20*q.z;try{paintOrganism(c,q.o,q.x*w,q.y*h+Math.sin(t*.5+q.ph)*8,S0*q.S*q.z,t+q.ph,!LITE)}catch(e){}c.restore()});
   const vg=c.createRadialGradient(w/2,h/2,Math.min(w,h)*.3,w/2,h/2,Math.max(w,h)*.75);vg.addColorStop(0,'rgba(5,13,18,0)');vg.addColorStop(1,'rgba(5,13,18,.8)');c.fillStyle=vg;c.fillRect(0,0,w,h)}
 function renderTitle(){const el=document.getElementById('title');if(!el)return;el.hidden=!TITLE;tutRender();if(!TITLE)return;const m=saveMeta();const b=document.getElementById('tbtns'),pn=document.getElementById('tpanel');
-  if(TPANEL){b.hidden=true;pn.hidden=false;pn.innerHTML=TPANEL==='how'?howHTML():TPANEL==='ach'?achPanelHTML():settingsHTML();return}b.hidden=false;pn.hidden=true;
+  if(TPANEL){b.hidden=true;pn.hidden=false;pn.innerHTML=TPANEL==='how'?howHTML():TPANEL==='ach'?achPanelHTML():TPANEL==='guide'?guideHTML():settingsHTML();return}b.hidden=false;pn.hidden=true;
   b.innerHTML=`${m?`<button class="tbtn primary" data-act="t-continue"><span>Continue</span><small>World ${esc(m.code)} · epoch ${m.epoch} of ${m.maxe}${m.name?` · ${esc(m.name)}`:''} · saved ${agoText(m.at)}</small></button>`:''}
    <button class="tbtn ${m?'':'primary'}" data-act="t-tutorial"><span>Tutorial${PLAYED?'':' <em>Start here</em>'}</span><small>A guided first game on a friendly world, about 3 minutes to learn the basics.</small></button>
+   ${(()=>{const ds=todayStr();const D=PROF.daily||{};const pl=(D.played||{})[ds];const dt=new Date().toLocaleDateString(undefined,{month:'short',day:'numeric'});return `<button class="tbtn" data-act="t-daily"><span>📅 Daily world · ${dt}${pl!=null?' <em style="background:var(--o2)">Played</em>':''}</span><small>Everyone gets the same world today. ${pl!=null?`Your best today: ${pl}.`:'One shared world, 20 epochs, 3 rivals.'}${D.streak>1&&D.last?` Streak: ${D.streak} days.`:''}</small></button>`})()}
    <button class="tbtn" data-act="t-new"><span>New game</span><small>Roll a random world, pick a founder, and evolve.${m?' Replaces your saved game once you reach the first draft.':''}</small></button>
    <div class="trow"><button class="tbtn sm" data-act="t-how"><span>How to play</span></button><button class="tbtn sm" data-act="t-settings"><span>Settings</span></button></div>
+   <button class="tbtn sm" data-act="t-guide"><span>📖 Field guide</span></button>
    <button class="tbtn sm" data-act="t-ach"><span>🏆 Achievements · ${rankOf(profPts())[1]} · ${ACH.filter(a=>PROF.ach[a.id]).length}/${ACH.length}</span></button>`}
 function howHTML(){return `<h2>How to play</h2><ol class="howto">
   <li><b>Pick a founder.</b> Each random world offers three starting microbes. Each one starts wherever its genes fit best. Look at <i>growth</i> (above 1 means it can grow) and <i>room</i> (how many cells the area can feed).</li>
-  <li><b>Seed a mutation each epoch.</b> Time stops between epochs. Pick one gene card, then click the map to place a dozen mutant cells. Green patches are where that gene helps. Selection and luck decide if it spreads. Gene slots are limited, so new genes can push old ones out. Picks cost sway (5 for a small gene, 20 for a big transition); the 🎲 wild card is a free gamble.</li>
+  <li><b>Seed a mutation each epoch.</b> Time stops between epochs. Pick one gene card, then click the map to place a dozen mutant cells. Green patches are where that gene helps. Selection and luck decide if it spreads. Gene slots are limited, so new genes can push old ones out. Picks cost sway (4 for a small gene, 15 for a big transition); the 🎲 wild card is a free gamble.</li>
   <li><b>Watch and react.</b> Every dot is a cell that eats, divides, mutates, and dies. Forecasts warn you about events. Spend <i>sway</i> on refuges, currents, isolation, and opportunities that pop up mid-epoch.</li>
-  <li><b>Climb the tree of life.</b> Stack genes to become a eukaryote, then multicellular, then a plant, animal, fungus, lichen, vent reef, or ice colony, depending on your world.</li></ol>
+  <li><b>Shape the planet.</b> Mats and lichens turn rock into soil, burrowing animals stir up nutrients, and huge blooms of photosynthesizers cool the climate.</li><li><b>Climb the tree of life.</b> Stack genes to become a eukaryote, then multicellular, then a plant, animal, fungus, lichen, vent reef, or ice colony, depending on your world.</li></ol>
   <div class="keys"><span><kbd>Space</kbd> pause</span><span><kbd>1</kbd>–<kbd>4</kbd> speed</span><span>Tap any dotted word for a definition</span></div>
   <div class="btnrow"><button class="btn" data-act="t-tutorial">Play the tutorial</button><button class="btn ghost" data-act="t-back">Back</button></div>`}
 function settingsHTML(){return `<h2>Settings</h2><div class="setlist">
   <label class="setrow"><span><b>Sound</b><small>Ambient music and effects, made live in the browser.</small></span><button class="tog" data-act="t-sound" aria-pressed="${SND.on}">${SND.on?'On':'Off'}</button></label>
   <label class="setrow"><span><b>Lite graphics</b><small>Fewer cells and effects for older phones and laptops. Turns on by itself if the game stutters.</small></span><button class="tog" data-act="t-lite" aria-pressed="${LITE}">${LITE?'On':'Off'}</button></label>
   <label class="setrow"><span><b>World size</b><small>Large worlds have 2.25× the area and room for more cells. Zoom with the + and − buttons, the mouse wheel, or a pinch.</small></span><span class="seg"><button data-act="t-wsize" data-v="standard" aria-pressed="${WSIZE!=='large'}">Standard</button><button data-act="t-wsize" data-v="large" aria-pressed="${WSIZE==='large'}">Large</button></span></label>
+  <label class="setrow"><span><b>Classroom notes</b><small>Adds a short science note to each epoch summary and a three-question check at the end of every run, built from what happened in your game.</small></span><button class="tog" data-act="t-class" aria-pressed="${CLASS_ON}">${CLASS_ON?'On':'Off'}</button></label>
   <label class="setrow"><span><b>Mutation pop-up</b><small>Open the mutation cards in the middle of the screen at each epoch. Off keeps them in the side panel.</small></span><button class="tog" data-act="t-dlg" aria-pressed="${DLG_ON}">${DLG_ON?'On':'Off'}</button></label>
   <label class="setrow"><span><b>Tips</b><small>Short hints the first time something new happens.</small></span><button class="tog" data-act="t-tips" aria-pressed="${TIPS_ON}">${TIPS_ON?'On':'Off'}</button></label>
   <label class="setrow"><span><b>Game length</b><small>Quick 10 epochs, standard 20, long 30 (more time for the climb to complex life).</small></span><span class="seg"><button data-act="t-len" data-v="10" aria-pressed="${LASTLEN===10}">10</button><button data-act="t-len" data-v="20" aria-pressed="${LASTLEN===20}">20</button><button data-act="t-len" data-v="30" aria-pressed="${LASTLEN===30}">30</button></span></label>
@@ -2038,6 +2139,7 @@ function act(a,d){if(TUTI>=0&&G&&G.tut)tutEvent(a);switch(a){
   case'menu':showTitle();return;
   case't-continue':TPANEL=null;if(G&&(G.mode==='run'||G.mode==='draft')&&G.code===(saveMeta()||{}).code){hideTitle();if(G.mode==='run'&&G.speed===0)G.speed=G.lastSpeed||1}else if(resumeGame()){applyTab();hideTitle()}else renderTitle();UI.toolsDirty=true;break;
   case't-tutorial':TPANEL=null;tutStart();break;
+  case't-daily':TPANEL=null;if(TUTI>=0)tutEnd();startDaily();hideTitle();window.scrollTo(0,0);break;
   case't-new':TPANEL=null;if(TUTI>=0)tutEnd();if(!G||G.mode!=='setup'||G.tut){LASTLEN=LASTLEN||20;freshWorld(randSeed(),LASTW)}hideTitle();window.scrollTo(0,0);break;
   case't-how':TPANEL='how';renderTitle();return;
   case't-settings':TPANEL='settings';renderTitle();return;
@@ -2076,6 +2178,9 @@ function act(a,d){if(TUTI>=0&&G&&G.tut)tutEvent(a);switch(a){
   case'planet':if(G.mode==='setup'&&G.world!=='history'){PLANET_PICK=d.v||null;try{localStorage.setItem('deeptime_planet',PLANET_PICK||'')}catch(e){}makeWorld(G.seed,G.world);buildBG();UI.speciesKey=''}break;
   case'chal':if(G.mode==='setup'&&chalUnlocked(d.v)){G.chal=G.chal||{};G.chal[d.v]=!G.chal[d.v];PROF.chal=Object.assign({},G.chal);saveProf()}break;
   case't-ach':TPANEL='ach';renderTitle();return;
+  case't-guide':TPANEL='guide';renderTitle();return;
+  case't-class':CLASS_ON=!CLASS_ON;try{localStorage.setItem('deeptime_class',CLASS_ON?'1':'0')}catch(e){}renderTitle();break;
+  case'quiz':{if(G.quiz){const i=+d.q;if(G.quiz.ans[i]==null)G.quiz.ans[i]=+d.o}break}
   case'album':{const sp=specTarget().sp;if(sp){const i=+d.i;G.specSp=sp.id;G.specIdx=G.specIdx===i?null:i}albumKey='';break}
   case'specsp':{G.specSp=+d.id;G.specIdx=null;const q=G.species[+d.id];if(q&&q.alive)G.sel=q.id;albumKey='';UI.speciesKey='';break}
   case'speclive':G.specIdx=null;albumKey='';break;
@@ -2091,6 +2196,9 @@ function act(a,d){if(TUTI>=0&&G&&G.tut)tutEvent(a);switch(a){
   case'begin':if(G.mode==='setup'){G.codeErr='';beginRun();UI.speciesKey=''}break;
   case'copycode':{const sc=shareCode();try{navigator.clipboard.writeText(sc).then(()=>flash('Copied '+sc+'. A friend who loads it gets the same map, planet, size, length, rivals, and challenges.'),()=>flash('Copy failed. The code is '+sc))}catch(e){flash('The code is '+sc)}break}
   case'closeend':G.ui_closedEnd=true;break;
+  case'chron':showChronicle();return;
+  case'chronsave':saveChronicle();return;
+  case'chronclose':{const el=document.getElementById('chron');el.hidden=true;el.innerHTML='';return}
   case'showend':G.ui_closedEnd=false;break;}
   UI.toolsDirty=true;UI.hintDirty=true;UI.modalDirty=true;UI.draftDirty=true;uiTick(true);}
 document.addEventListener('change',e=>{if(e.target.id!=='dropsel'||!G||G.mode!=='draft')return;const cur=G.draft[G.sel]?G.sel:+Object.keys(G.draft)[0];const dr=G.draft[cur];if(!dr||!dr.pick)return;const d=G.strains[dr.dom];if(!d)return;dr.drop[dr.pick]=e.target.value;dr.prev[dr.pick]=preview(+cur,d,dr.pick,e.target.value);UI.draftDirty=true;uiTick(true)});
