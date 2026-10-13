@@ -788,7 +788,7 @@ function agreeEpi(e,gd){const SP={celer:{f:'celeris',n:'celere'},alter:{f:'alter
   if(/us$/.test(e))return gd==='m'?e:e.slice(0,-2)+(gd==='f'?'a':'um');if(/is$/.test(e))return gd==='n'?e.slice(0,-2)+'e':e;return e}
 function latinName(genus,epi){return genus+' '+agreeEpi(epi,genusGender(genus))}
 const epiStem=e=>String(e||'').slice(0,5);
-const HEPI={vent:'hydrothermalis',deep:'profundus',shallow:'litoralis',tidal:'aestuarii',land:'lithophilus',spring:'fervens',brine:'cryophilus',ice:'glacialis'};
+const HEPI={vent:'hydrothermalis',deep:'profundus',shallow:'litoralis',tidal:'aestuarii',land:'lithophilus',spring:'fervens',brine:'cryophilus',ice:'glacialis',mountain:'montanus',river:'fluviatilis',lake:'lacustris',soil:'terrestris'};
 const XTRA=['icebind','sulfresp','pigment','biofilm','flagellum','csp','hsp','katg','efflux','gasves','spores','wall','crispr','proof','mutator','nfix','competence','streamline','biggenome','sos'];
 const METN={chemo:'chemical energy',anoxy:'light (no oxygen)',ferment:'dissolved organics',oxy:'light (makes oxygen)'};
 function genGenome(R){const mets=['chemo','anoxy','ferment','oxy'],mw=[1,1,1,.35];let x=R()*3.35,i=0;while(i<3&&x>mw[i]){x-=mw[i];i++}if(G&&G.mod&&G.mod.darkAll&&(i===1||i===3))i=R()<.5?0:2;const tr=[mets[i]];
@@ -801,7 +801,7 @@ function bestRegion(g,R,avoid,minDist){const s=stats({traits:g.traits,loads:[],t
   for(const c0 of order){if(seen[c0])continue;const cells=[c0];seen[c0]=1;for(let i=0;i<cells.length&&cells.length<30;i++)for(const q of nb4(cells[i]))if(!seen[q]&&cap[q]>=1&&cells.length<30){seen[q]=1;cells.push(q)}
     const far=avoid.every(a=>Math.hypot(a%GX-c0%GX,Math.floor(a/GX)-Math.floor(c0/GX))>=minDist);if(!far)continue;let room=0;cells.forEach(c=>room+=cap[c]);regs.push({cell:c0,room:Math.round(room*ROOMK)})}
   if(!regs.length)return null;regs.sort((a,b)=>b.room-a.room);const r=regs[Math.floor(R()*Math.min(3,regs.length))];return{cell:r.cell,room:r.room,w:fitCalc(s,r.cell).w,biome:G.tb[r.cell]}}
-function nameFor(g,biome,R,used){for(let k=0;k<20;k++){const gen=GENUS[g.traits[0]][Math.floor(R()*4)]+GSUF[Math.floor(R()*GSUF.length)];const nm=latinName(gen,HEPI[biome]);const code=(gen.slice(0,2)+HEPI[biome][0]).toUpperCase();if(!used.includes(code)&&!used.includes(nm))return{name:nm,code}}return{name:'Protobiont '+HEPI[biome],code:'PX'+used.length}}
+function nameFor(g,biome,R,used){for(let k=0;k<20;k++){const gen=GENUS[g.traits[0]][Math.floor(R()*4)]+GSUF[Math.floor(R()*GSUF.length)];const nm=latinName(gen,HEPI[biome]||'novus');const code=(gen.slice(0,2)+HEPI[biome][0]).toUpperCase();if(!used.includes(code)&&!used.includes(nm))return{name:nm,code}}return{name:'Protobiont '+HEPI[biome],code:'PX'+used.length}}
 function makeFounders(roll){const R=mulberry(G.seed*31+roll*977+7);const out=[];let tries=0;
   while(out.length<3&&tries<160){tries++;const g=genGenome(R);const pl=bestRegion(g,R,[],0);if(!pl)continue;const strict=tries<120;
     if(pl.w<(strict?1.5:1.2)||pl.w>2.9||pl.room<(strict?28:15))continue;
