@@ -101,6 +101,8 @@ i.sp{font-style:italic;font-weight:600}
 .scinote{margin-top:8px;padding:8px 10px;border-left:3px solid var(--o2);background:rgba(134,211,227,.06);border-radius:6px;display:grid;gap:4px;font-size:13px}
 .quiz{display:grid;gap:10px;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:rgba(134,211,227,.04)}.qq{display:grid;gap:6px}.qq p{font-size:13.5px}.qopts{display:grid;gap:5px}
 .qo{font:inherit;font-size:13px;text-align:left;padding:7px 10px;border-radius:8px;border:1px solid var(--line2);background:var(--bg2);color:var(--ink);cursor:pointer}.qo.ok{border-color:var(--good);background:rgba(147,211,138,.15)}.qo.no{border-color:var(--bad);background:rgba(234,122,94,.14)}.qo:disabled{cursor:default}
+.speccard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,calc(100% - 24px));background:rgba(12,30,26,.96);border:1px solid #B9F0A0;border-radius:14px;padding:14px 16px;display:grid;gap:8px;z-index:4;box-shadow:0 14px 40px rgba(0,0,0,.55)}.speccard b{font-size:16px}.speccard p{font-size:13.5px;line-height:1.45}
+@media (max-width:700px){.speccard{position:fixed;top:auto;bottom:8px;left:8px;right:8px;transform:none;width:auto;z-index:27}}
 .toast.t-ach{background:rgba(40,32,10,.95);border-color:#FFD76A}
 .setupov{position:fixed;inset:0;z-index:22;background:radial-gradient(120% 90% at 30% 20%,#12303A,#081318 70%);overflow:auto;padding:0 16px 32px}
 .sohead{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 0}
@@ -357,9 +359,9 @@ kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);borde
       </div>
       <p class="hint" id="hint"></p>
     </div>
-    <div class="cwrap" id="cwrap"><canvas id="cv" aria-label="Live map of the early Earth"></canvas><div class="banner" id="banner" hidden></div><div class="pausetag" id="pausetag"></div><div class="toast" id="toast" role="status" hidden></div><div class="opp" id="opp" hidden></div><div class="coach" id="coach" hidden></div><div class="mapbar" id="mapbar" hidden></div><div class="zoomctl" role="group" aria-label="Zoom"><button data-act="zoom" data-v="in" aria-label="Zoom in">+</button><button data-act="zoom" data-v="out" aria-label="Zoom out">−</button><button data-act="zoom" data-v="fit" aria-label="Show whole world">⤢</button></div></div>
+    <div class="cwrap" id="cwrap"><canvas id="cv" aria-label="Live map of the early Earth"></canvas><div class="banner" id="banner" hidden></div><div class="pausetag" id="pausetag"></div><div class="toast" id="toast" role="status" hidden></div><div class="speccard" id="speccard" role="dialog" aria-label="New species" hidden></div><div class="opp" id="opp" hidden></div><div class="coach" id="coach" hidden></div><div class="mapbar" id="mapbar" hidden></div><div class="zoomctl" role="group" aria-label="Zoom"><button data-act="zoom" data-v="in" aria-label="Zoom in">+</button><button data-act="zoom" data-v="out" aria-label="Zoom out">−</button><button data-act="zoom" data-v="fit" aria-label="Show whole world">⤢</button></div></div>
     <div class="maplegend" id="legend" role="group" aria-label="Highlight on map"></div>
-    <details class="mapkey"><summary>Map key</summary><div class="mkrow"><span class="lgb" style="--c:#0C2338">Deep ocean (darker = farther out)</span><span class="lgb" style="--c:#2C8E98">Shallow sea</span><span class="lgb" style="--c:#7AC4CE">Pale line: edge of the shelf</span><span class="lgb" style="--c:#FF9A5A">Glowing cracks: hydrothermal vents</span><span class="lgb" style="--c:#9C8A60">Tidal flats</span><span class="lgb" style="--c:#685E54">Bare rock</span><span class="lgb" style="--c:#4E542E">Soil (made by life)</span><span class="lgb" style="--c:#5AAA50">Green tint: microbial mats</span><span class="lgb" style="--c:#C89048">Ringed pools: hot springs</span><span class="lgb" style="--c:#E2EEF6">White bands: polar zones (1 step colder; sea ice over water)</span><span class="lgb" style="--c:#5C96AC">Brine channels</span><span class="lgb" style="--c:#DAE6EE">Ice shell</span></div><p class="why">Hover or tap any patch to read its exact conditions.</p></details>
+    <details class="mapkey"><summary>Map key</summary><div class="mkrow"><span class="lgb" style="--c:#0C2338">Deep ocean (darker = farther out)</span><span class="lgb" style="--c:#2C8E98">Shallow sea</span><span class="lgb" style="--c:#7AC4CE">Pale line: edge of the shelf</span><span class="lgb" style="--c:#FF9A5A">Glowing cracks: hydrothermal vents</span><span class="lgb" style="--c:#9C8A60">Tidal flats</span><span class="lgb" style="--c:#685E54">Bare rock</span><span class="lgb" style="--c:#4E542E">Soil (made by life)</span><span class="lgb" style="--c:#9A9086">Mountains (cold, high UV)</span><span class="lgb" style="--c:#3A88A4">Rivers and lakes (fresh water)</span><span class="lgb" style="--c:#5AAA50">Green tint: microbial mats</span><span class="lgb" style="--c:#C89048">Ringed pools: hot springs</span><span class="lgb" style="--c:#E2EEF6">White bands: polar zones (1 step colder; sea ice over water)</span><span class="lgb" style="--c:#5C96AC">Brine channels</span><span class="lgb" style="--c:#DAE6EE">Ice shell</span></div><p class="why">Hover or tap any patch to read its exact conditions.</p></details>
     <div class="under">
       <div class="panel specimen"><div class="spechead"><div><div class="eyebrow">Specimen · dominant strain</div><h3 id="specName">&nbsp;</h3><p class="why" id="specForm"></p></div><span class="specstage" id="specStage"></span></div><canvas id="spec" aria-label="Your organism, drawn from its genes"></canvas><div class="spectabs" id="specTabs"></div><div class="eyebrow">Lineage album · tap a form to view it</div><div class="album" id="album"></div></div>
       <div class="stackcol"><div class="panel" id="inspect"></div><div class="panel"><div class="eyebrow">Population, last 5 minutes of sim time</div><canvas id="chart"></canvas></div></div>
@@ -438,6 +440,9 @@ const BIOMES={
   land:{name:'Bare rock',temp:2,light:3,chem:0,nutr:0,uv:3,dry:2,land:1,col:[72,67,63],note:'No soil and no ozone. Needs UV shielding and drought tolerance.'},
   ice:{name:'Ice shell',temp:-2,light:1,chem:0,nutr:0,uv:1,dry:2,land:1,col:[178,202,214],note:'Kilometers of frozen ocean. Only brine veins stay liquid.'},
   brine:{name:'Brine channels',temp:-1,light:1,chem:0,nutr:2,uv:0,dry:0,tox:1,col:[70,122,142],note:'Salty liquid veins inside the ice: cold, dim, rich in nutrients.'},
+  mountain:{name:'Mountains',temp:1,light:3,chem:0,nutr:0,uv:3,dry:2,land:1,col:[150,140,128],note:'High, cold, thin-aired rock. UV is fierce, and snowmelt here feeds the rivers.'},
+  river:{name:'River',temp:2,light:3,chem:0,nutr:2,uv:1,dry:0,fresh:1,col:[52,138,160],note:'Fresh water running from the mountains to the sea, and a highway inland. Marine cells swell and burst in it unless they can osmoregulate; land life crowds its banks.'},
+  lake:{name:'Lake',temp:2,light:3,chem:0,nutr:2,uv:1,dry:0,fresh:1,col:[52,128,156],note:'A basin of still fresh water with no outlet to the sea.'},
   soil:{name:'Soil',temp:2,light:3,chem:0,nutr:2,uv:2,dry:1,land:1,col:[74,76,44],note:'Made by life: weathered rock mixed with dead organic matter. It holds water and nutrients that bare rock never could.'},
   spring:{name:'Hot spring',temp:3,light:2,chem:2,nutr:1,uv:1,dry:0,land:1,col:[128,88,38],note:'Geothermal pools ringed with microbial mats.'}
 };
@@ -514,6 +519,7 @@ const TR={
  rhodo:{name:'Proteorhodopsin',locus:'pR (retinal pump)',cat:'Metabolism',req:s=>!s.f.oxy&&!s.f.anoxy&&!s.f.lichen,reqText:'Not already photosynthetic',pros:['A little energy from light (efficiency 0.25)'],cons:['Upkeep +0.05'],sci:'One light-driven proton pump lets ocean heterotrophs top up on sunlight.',fx:s=>{s.f.rhodo=1;s.up+=.05}},
  toxanti:{name:'Toxin–antitoxin module',locus:'hipBA',cat:'Stress',pros:['Dormant persister cells: catastrophe deaths −30%','Toxin resistance +1'],cons:['Growth ×0.94'],sci:'A few cells go dormant at random. Disasters and antibiotics spare them: bet-hedging.',fx:s=>{s.cat*=.7;s.tox+=1;s.gen*=.94}},
  gliding:{name:'Gliding motility',locus:'gld / spr',cat:'Motility',pros:['Dispersal +1, even inside biofilm'],cons:['Upkeep +0.05'],sci:'Cells glide over surfaces with no flagellum, riding a conveyor belt of adhesins.',fx:s=>{s.disp+=1;s.up+=.05}},
+ fresh:{name:'Contractile vacuole',locus:'osmoregulation / aquaporins',cat:'Stress',pros:['Lives in rivers and lakes with no osmotic shock'],cons:['Upkeep +0.05'],sci:'In fresh water, water floods into cells by osmosis. Protists bail it out with contractile vacuoles; walled bacteria simply resist the pressure. Every freshwater lineage on Earth had to solve this.',fx:s=>{s.f.fresh=1;s.up+=.05}},
  L_codon:{load:1,temp:1,name:'Codon mismatch',locus:'foreign gene',cons:['Energy ×0.9, upkeep +0.05 until domesticated (one epoch)'],sci:'Transferred genes use a different codon dialect, so the host translates them slowly until mutations tune them.',fx:s=>{s.emul*=.9;s.up+=.05}},
  L_atp:{load:1,name:'Frameshift in atpD',locus:'ATP synthase β',cons:['Energy ×0.88'],fx:s=>{s.emul*=.88}},
  L_is:{load:1,name:'Insertion element',locus:'IS transposon',cons:['Upkeep +0.12'],fx:s=>{s.up+=.12}},
@@ -576,7 +582,7 @@ function condCalc(c){const b=BIOMES[G.tb[c]],pol=G.pol[c];const cm=G.cm;
   const nutr=Math.max(0,b.nutr+(b.ocean?fxSum('nutr',c):0)+(bt==='shallow'||bt==='tidal'?G.mod.nutr:0)+(cm?cm.n[c]:0));
   let uv=b.uv>0?b.uv+G.mod.uv+fxSum('uv',c)+(cm?cm.u[c]:0):0;if(G.mod.darkAll)uv=0;uv=Math.max(0,uv-(G.o2>=1.5?1:0)-(G.o2>=2.5?1:0));
   const o2=b.deep?Math.max(0,G.o2-1.2):G.o2;const eg=G.eng;const turb=eg&&eg.turb[c]>G.t?1:0,mat=eg&&eg.mat[c]>G.t?1:0;
-  return{temp,light,nutr:nutr+turb,chem:b.chem+(cm?cm.c[c]:0),uv,dry:Math.max(0,b.dry+(cm?cm.d[c]:0)-mat),tox:(b.tox||0)+fxSum('tox',c)+(cm?cm.x[c]:0),o2,ocean:!!b.ocean,land:!!b.land};}
+  return{temp,light,nutr:nutr+turb,chem:b.chem+(cm?cm.c[c]:0),uv,dry:Math.max(0,b.dry+(cm?cm.d[c]:0)-mat-(G.ripar&&G.ripar[c]?1:0)),fresh:!!b.fresh,tox:(b.tox||0)+fxSum('tox',c)+(cm?cm.x[c]:0),o2,ocean:!!b.ocean,land:!!b.land};}
 function refreshCond(){for(let c=0;c<NC;c++)COND[c]=condCalc(c);FSTAMP++;}
 
 /* synergies and clashes between genes (applied inside stats) */
@@ -605,7 +611,7 @@ function synChip(y){return `<span class="syn ${y.good?'g':'b'}" tabindex="0" dat
 function stats(st){
   const s={tmin:st.tmin,tmax:st.tmax,o2:0,uv:0,tox:0,dry:0,def:0,disp:1,mut:2,gen:1,up:1,emul:1,hand:0,cat:1,phage:1,power:1,lmul:1,nmul:1,pred:1,f:{}};
   st.traits.forEach(id=>TR[id].fx(s));st.loads.forEach(id=>TR[id].fx(s));synOf(st.traits).forEach(y=>y.fx(s));
-  if(s.f.aerobic&&!s.f.katg)s.mut+=1;if(G&&G.chal&&G.chal.storm)s.mut+=1;
+  if(s.f.aerobic&&!s.f.katg)s.mut+=1;s.f.sessile=!!((s.f.plant||s.f.lichen||s.f.fungus||s.f.reef||s.f.icecol||s.f.chemosym)&&!s.f.animal&&!s.f.muscle);if(G&&G.chal&&G.chal.storm)s.mut+=1;
   s.mut=clamp(s.mut,0,5);s.disp=Math.max(0,s.disp);s.tmin=clamp(s.tmin,-2,3);s.tmax=clamp(s.tmax,s.tmin,4);s.up=Math.max(.5,s.up);
   return s;}
 const FREE_T=new Set(['chemo','ferment','anoxy','oxy']);
@@ -621,6 +627,7 @@ function stressOf(s,k){let S=1;const why=[];
   if(k.uv>s.uv){S*=Math.pow(.6,k.uv-s.uv);why.push('UV damage')}
   if(k.tox>s.tox){S*=Math.pow(.5,k.tox-s.tox);why.push('toxins')}
   if(k.dry>s.dry){S*=Math.pow(.45,k.dry-s.dry);why.push('desiccation')}
+  if(k.fresh&&!s.f.fresh){S*=s.f.plant||s.f.cuticle?.85:s.f.wall?.75:.45;why.push('osmotic shock (fresh water)')}
   return{S,why};}
 function fitCalc(s,c,kk){const k=kk||COND[c];const{S}=stressOf(s,k);const bt=G.tb[c];
   const m=s.emul*(s.f.aerobic?1+.4*Math.min(k.o2,2):1)*(s.f.efflux&&k.tox<=0?.9:1)*S;
@@ -631,7 +638,7 @@ function fitCalc(s,c,kk){const k=kk||COND[c];const{S}=stressOf(s,k);const bt=G.t
   let en=k.nutr>0?(s.f.ferment?.6:(s.f.animal||s.f.fungus)?.45:0)*s.nmul*m:0;
   if(s.f.nitrate&&k.nutr>=1&&k.o2<1&&!G.mod.dark){ec*=1.5;en*=1.5}
   let nb=0;if(s.f.nfix&&(s.f.hetero||k.o2<2))nb+=(s.f.hetero?.25:.12)*S*(s.f.nfixHalf?.5:1);
-  if(s.f.roots&&(bt==='land'||bt==='soil'||bt==='tidal'||bt==='ice'))nb+=.3*S;
+  if(s.f.roots&&(bt==='land'||bt==='soil'||bt==='tidal'||bt==='ice'||bt==='mountain'||(G.ripar&&G.ripar[c])))nb+=.3*S;
   if(s.f.icecol&&(bt==='brine'||bt==='ice'))nb+=.35*S;
   const w=(1.0*s.gen*(ec+el+en)+nb)/(.3*s.up);
   return{ec,el,en,nb,S,w};}
@@ -697,6 +704,35 @@ function vnoise(){const N=48,a=new Float32Array(N*N);for(let i=0;i<a.length;i++)
   return(g(xi,yi)*(1-u)+g(xi+1,yi)*u)*(1-v)+(g(xi,yi+1)*(1-u)+g(xi+1,yi+1)*u)*v}}
 function nb4(c){const x=c%GX,y=Math.floor(c/GX),o=[];if(x>0)o.push(c-1);if(x<GX-1)o.push(c+1);if(y>0)o.push(c-GX);if(y<GY-1)o.push(c+GX);return o}
 const pick2=a=>a[Math.floor(WR()*a.length)];
+/* mountains, rivers, lakes (separate RNG so the rest of world generation is unchanged) */
+function genRelief(E){const R=mulberry((G.seed*7+3)>>>0);G.flow=new Array(NC).fill(-1);G.rivers=[];G.ripar=new Array(NC).fill(0);G.alt=new Array(NC).fill(0);
+  const isW=c=>BIOMES[G.tb[c]].ocean;const inl=new Array(NC).fill(-1),q=[];for(let c=0;c<NC;c++)if(isW(c)){inl[c]=0;q.push(c)}
+  for(let i=0;i<q.length;i++){const c=q[i];for(const n of nb4(c))if(inl[n]<0){inl[n]=inl[c]+1;q.push(n)}}
+  const land=[];for(let c=0;c<NC;c++)if(!isW(c)){land.push(c);G.alt[c]=Math.min(3,inl[c])}if(land.length<12)return;
+  const es=land.map(c=>E[c]).sort((a,b)=>a-b);const th=es[Math.floor(es.length*.84)];
+  let mtn=[];for(const c of land)if(G.tb[c]==='land'&&inl[c]>=2&&E[c]>=th){G.tb[c]='mountain';G.alt[c]=4;mtn.push(c)}
+  const nR=clamp(Math.round(land.length/(GX*GY/9)),1,G.gx>40?7:4);const src=(mtn.length?mtn:land.filter(c=>inl[c]>=2)).slice();
+  for(let r=0;r<nR&&src.length;r++){const s=src.splice(Math.floor(R()*src.length),1)[0];const path=[s];const seen=new Set([s]);let cur=s,mouth=-1;
+    for(let k=0;k<80;k++){let best=-1,bv=1e9;for(const n of nb4(cur)){if(seen.has(n))continue;const v=(isW(n)?-9:0)+(G.tb[n]==='river'?-5:0)+E[n]+inl[n]*.05+R()*.04;if(v<bv){bv=v;best=n}}
+      if(best<0)break;if(isW(best)){mouth=best;break}if(G.tb[best]==='river'){path.push(best);mouth=-2;break}seen.add(best);path.push(best);cur=best}
+    if(path.length<3)continue;if(mouth===-1){const end=path[path.length-1];G.tb[end]='lake';for(const n of nb4(end))if(!isW(n)&&G.tb[n]!=='mountain'&&R()<.5)G.tb[n]='lake'}
+    for(let i=1;i<path.length;i++){const c=path[i];if(G.tb[c]!=='lake')G.tb[c]='river';if(i<path.length-1||mouth>=0)G.flow[c]=i<path.length-1?path[i+1]:mouth}
+    G.flow[path[0]]=path[1];G.rivers.push({cells:path,mouth})}
+  for(let c=0;c<NC;c++){const b=G.tb[c];if(b==='river'||b==='lake')for(const n of nb4(c)){const t=G.tb[n];if(t==='land'||t==='soil'||t==='mountain'||t==='tidal')G.ripar[n]=1}}}
+function paintRelief(b){if(!G.rivers)return;G.rivers=G.rivers.filter(rv=>rv.cells.filter(c=>G.tb[c]==='river').length>=2);for(const rv of G.rivers)rv.cells=rv.cells.filter((c,i)=>i===0||G.tb[c]==='river'||G.tb[c]==='lake');
+  for(let c=0;c<NC;c++){if(G.tb[c]!=='mountain')continue;const[x,y]=cc(c);b.strokeStyle='rgba(40,34,30,.45)';b.lineWidth=1.4;for(let k=0;k<2;k++){const ox=((c*17+k*11)%13-6)*1.4,oy=((c*31+k*7)%11-5)*1.4;b.beginPath();b.moveTo(x+ox-6,y+oy+4);b.lineTo(x+ox,y+oy-4);b.lineTo(x+ox+6,y+oy+4);b.stroke();b.fillStyle='rgba(245,248,250,.8)';b.beginPath();b.moveTo(x+ox-2,y+oy-1.3);b.lineTo(x+ox,y+oy-4);b.lineTo(x+ox+2,y+oy-1.3);b.closePath();b.fill()}}
+  for(const rv of G.rivers){const pts=rv.cells.map(c=>{const[x,y]=cc(c);return[x+((c*13)%9-4)*2.2,y+((c*7)%9-4)*2.2]});if(rv.mouth>=0){const[mx,my]=cc(rv.mouth);pts.push([mx,my])}if(pts.length<2)continue;
+    const draw=(w,col)=>{b.strokeStyle=col;b.lineCap='round';b.lineJoin='round';for(let i=0;i<pts.length-1;i++){b.lineWidth=w*(0.55+0.6*i/(pts.length-1));b.beginPath();const[x0,y0]=i?[(pts[i-1][0]+pts[i][0])/2,(pts[i-1][1]+pts[i][1])/2]:pts[0];const[x2,y2]=[(pts[i][0]+pts[i+1][0])/2,(pts[i][1]+pts[i+1][1])/2];b.moveTo(x0,y0);b.quadraticCurveTo(pts[i][0],pts[i][1],i===pts.length-2?pts[i+1][0]:x2,i===pts.length-2?pts[i+1][1]:y2);b.stroke()}};
+    draw(20,'rgba(110,150,80,.3)');draw(9,'rgba(44,124,156,.96)');draw(3.2,'rgba(150,215,230,.7)')}
+  for(let c=0;c<NC;c++){if(G.tb[c]!=='lake')continue;const[x,y]=cc(c);b.fillStyle='rgba(52,128,156,.9)';b.beginPath();b.ellipse(x,y,GC*.62,GC*.5,(c%5)*.6,0,6.283);b.fill();b.fillStyle='rgba(150,215,230,.25)';b.beginPath();b.ellipse(x-3,y-3,GC*.3,GC*.18,(c%5)*.6,0,6.283);b.fill()}}
+/* new species alerts: pause and explain */
+let SPECPAUSE=true;try{SPECPAUSE=localStorage.getItem('deeptime_specpause')!=='0'}catch(e){}
+function specAlert(sp,title,why){if(!G||G.tut||!sp)return;G.specQ=G.specQ||[];G.specQ.push({id:sp.id,title,why});if(!G.specCard)nextSpecAlert()}
+function nextSpecAlert(){const q=G.specQ||[];const a=q.shift();if(!a){G.specCard=null;if(G.specPrev!=null&&G.mode==='run'){G.speed=G.specPrev||1}G.specPrev=null;UI.toolsDirty=true;return}G.specCard=a;
+  if(SPECPAUSE&&G.mode==='run'){if(G.specPrev==null)G.specPrev=G.speed;G.speed=0}G.focus='sp:'+a.id;UI.toolsDirty=true;UI.specDirty=true;const c=densestWith(a.id,()=>true);if(c!=null){const[x,y]=cc(c);if(CAM.z>1.02)camCenter(x,y)}}
+function renderSpecCard(){const el=document.getElementById('speccard');if(!el)return;const a=G&&G.specCard;if(!a||G.mode==='setup'){if(!el.hidden){el.hidden=true;el.innerHTML=''}return}if(!UI.specDirty&&!el.hidden)return;UI.specDirty=false;
+  const sp=G.species[a.id];if(!sp){G.specCard=null;el.hidden=true;return}const n=players().length;
+  el.innerHTML=`<div class="eyebrow">New species${SPECPAUSE?' · time paused':''}</div><b><i class="dot" style="background:${spColor(sp)};display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px"></i><i class="sp">${esc(sp.name)}</i></b><p>${esc(a.why)}</p><p class="why">It is yours: you now have ${n} species. Each one gets its own mutation pick, its own color on the map, and its own line in the Species list and family tree. The highlighted cells are this species.</p><div class="btnrow"><button class="btn sm" data-act="specok">${(G.specQ||[]).length?`Next (${G.specQ.length} more)`:'Continue'}</button><label class="why" style="display:flex;gap:6px;align-items:center"><input type="checkbox" data-act="specpause" ${SPECPAUSE?'':'checked'}> Don’t pause for these</label></div>`;el.hidden=false}
 function genWorld(){
   const m=G.mod,arch=ARCH[G.arch];const n1=vnoise(),n2=vnoise(),n3=vnoise();
   const fb=(x,y,hi)=>hi?n1(x/4,y/4)*.55+n2(x/2,y/2)*.3+n3(x,y)*.15:n1(x/8,y/8)*.6+n2(x/4,y/4)*.28+n3(x/2,y/2)*.12;
@@ -730,8 +766,9 @@ function genWorld(){
   let landC=G.tb.map((b,c)=>b==='land'?c:-1).filter(c=>c>=0);if(landC.length<3)landC=G.tb.map((b,c)=>b==='tidal'||b==='land'?c:-1).filter(c=>c>=0);
   for(let k=0;k<m.springs&&landC.length;k++){const i=Math.floor(WR()*landC.length);const c=landC[i];G.tb[c]='spring';landC.splice(i,1);
     const grow=2+Math.floor(WR()*3);let edge=[c];for(let g=0;g<grow;g++){const n=nb4(pick2(edge)).find(n=>G.tb[n]==='land'||G.tb[n]==='tidal');if(n==null)break;G.tb[n]='spring';edge.push(n);const j=landC.indexOf(n);if(j>=0)landC.splice(j,1)}}
+  try{genRelief(E)}catch(e){G.flow=new Array(NC).fill(-1);G.rivers=[];G.ripar=new Array(NC).fill(0)}
 }
-function freezeWorld(){const oc=c=>BIOMES[G.tb[c]].ocean;const tb=[...G.tb];for(let c=0;c<NC;c++){const b=tb[c];if(b==='land'||b==='spring')G.tb[c]='ice';else if(b==='tidal')G.tb[c]='brine';else if(b==='shallow'&&nb4(c).some(q=>!BIOMES[tb[q]].ocean)&&WR()<.5)G.tb[c]='brine'}}
+function freezeWorld(){const oc=c=>BIOMES[G.tb[c]].ocean;const tb=[...G.tb];G.rivers=[];if(G.flow)G.flow.fill(-1);for(let c=0;c<NC;c++){const b=tb[c];if(b==='land'||b==='spring'||b==='mountain')G.tb[c]='ice';else if(b==='river'||b==='lake')G.tb[c]='brine';else if(b==='tidal')G.tb[c]='brine';else if(b==='shallow'&&nb4(c).some(q=>!BIOMES[tb[q]].ocean)&&WR()<.5)G.tb[c]='brine'}}
 function pickRivals(){const R=mulberry(G.seed*31+7);const n=RIVALN;const pool=RIVALS.map((r,i)=>i).filter(i=>G.tb.includes(RIVALS[i].home));const out=[];
   if(R()<.75){const ph=pool.filter(i=>RIVALS[i].photo);if(ph.length){const i=ph[Math.floor(R()*ph.length)];out.push(i);pool.splice(pool.indexOf(i),1)}}
   while(out.length<n&&pool.length)out.push(pool.splice(Math.floor(R()*pool.length),1)[0]);G.rivalDefs=out;}
@@ -790,17 +827,17 @@ const PLANETS2={
   pre:m=>{m.evw.uvflare=3;m.evw.snowball=.2;m.evw.sealow=.5},
   post(){const R=WR;const left=R()<.5;G.lockLeft=left;G.cm=cmNew();for(let c=0;c<NC;c++){const x=c%GX;const u=left?x/(GX-1):1-x/(GX-1);const b=BIOMES[G.tb[c]];
     if(u<.3){const k=u<.15?2:1;G.cm.t[c]=b.deep?1:k;if(b.uv>0)G.cm.u[c]=1;if(b.land||G.tb[c]==='tidal')G.cm.d[c]=1}
-    else if(u>.68){const k=u>.84?3:2;G.cm.t[c]=b.deep?-1:-k;G.cm.l[c]=-9;if(G.tb[c]==='land'||G.tb[c]==='spring')G.tb[c]='ice';else if(G.tb[c]==='tidal')G.tb[c]='brine';else if(G.tb[c]==='shallow')G.tb[c]='brine'}
+    else if(u>.68){const k=u>.84?3:2;G.cm.t[c]=b.deep?-1:-k;G.cm.l[c]=-9;if(G.tb[c]==='land'||G.tb[c]==='spring'||G.tb[c]==='mountain')G.tb[c]='ice';else if(G.tb[c]==='tidal'||G.tb[c]==='river'||G.tb[c]==='lake'){G.tb[c]='brine';if(G.flow)G.flow[c]=-1}else if(G.tb[c]==='shallow')G.tb[c]='brine'}
     else if(u>.5)G.cm.l[c]=-1}},
   tint(c,rgb){const x=c%GX;const u=G.lockLeft?x/(GX-1):1-x/(GX-1);const f=u<.3?1.08:u>.68?.55:1-.5*(u-.3);return[rgb[0]*f+(u<.2?18:0),rgb[1]*f,rgb[2]*f+(u>.7?14:0)]}},
  hycean:{name:'Global ocean',desc:'Water all the way around, hundreds of kilometers deep, with no continents at all. Without rock to weather, nutrients are scarce everywhere except the vents.',sci:'“Hycean” worlds like K2-18 b may be ocean planets. With no continents, phosphorus from weathering never reaches the water.',
   pre:m=>{m.vents+=3;m.springs=0;m.evw.sealow=0;m.evw.seahigh=0;m.evw.upwelling=1.6},
-  post(){G.cm=cmNew();for(let c=0;c<NC;c++){const b=G.tb[c];if(b==='land'||b==='spring'||b==='tidal')G.tb[c]='shallow';if(G.tb[c]!=='vent')G.cm.n[c]=-1}},
+  post(){G.cm=cmNew();G.rivers=[];if(G.flow)G.flow.fill(-1);for(let c=0;c<NC;c++){const b=G.tb[c];if(b==='land'||b==='spring'||b==='tidal'||b==='mountain'||b==='river'||b==='lake')G.tb[c]='shallow';if(G.tb[c]!=='vent')G.cm.n[c]=-1}},
   tint(c,rgb){return[rgb[0]*.9,rgb[1]*.98,rgb[2]*1.08]}},
  arid:{name:'Desert world',desc:'A dry, thin-aired planet: mostly bare rock under harsh sunlight, with a few shrinking salt seas and hot springs.',sci:'Early Mars probably looked like this: salt lakes, hot springs, and rock baked by UV. Halophiles thrive in brines like these on Earth.',
   pre:m=>{m.landFrac=.7;m.springs+=4;m.uv+=1;m.evw.sealow=1.6;m.evw.seahigh=.4;m.evw.snowball=.3},
   post(){G.cm=cmNew();for(let c=0;c<NC;c++){const b=BIOMES[G.tb[c]];if(G.tb[c]==='shallow'||G.tb[c]==='tidal')G.cm.x[c]=1;if(b.land||G.tb[c]==='tidal')G.cm.d[c]=1;if(!b.deep)G.cm.t[c]=1}},
-  tint(c,rgb){const b=G.tb[c];return b==='land'?[rgb[0]*1.35+18,rgb[1]*1.15+6,rgb[2]*.8]:b==='shallow'?[rgb[0]*1.05+20,rgb[1]*1.05+10,rgb[2]*.95]:rgb}},
+  tint(c,rgb){let b=G.tb[c];if(b==='river'||b==='lake')b='land';return b==='land'?[rgb[0]*1.35+18,rgb[1]*1.15+6,rgb[2]*.8]:b==='shallow'?[rgb[0]*1.05+20,rgb[1]*1.05+10,rgb[2]*.95]:rgb}},
  sulfur:{name:'Sulfur world',desc:'Volcanoes everywhere. Acidic seas laced with sulfide, a yellow haze that dims the Sun, and chemical energy even in the sunlit shallows.',sci:'Acid mine lakes like Río Tinto and volcanic pools like Yellowstone host whole ecosystems powered by sulfur and iron chemistry.',
   pre:m=>{m.vents+=4;m.springs+=4;m.ridges+=1;m.evw.volcanic=2.5;m.evw.metals=2},
   post(){G.cm=cmNew();for(let c=0;c<NC;c++){const b=BIOMES[G.tb[c]];if(b.ocean)G.cm.x[c]=1;if(G.tb[c]==='shallow'||G.tb[c]==='tidal')G.cm.c[c]=1;if(b.light>0)G.cm.l[c]=-1}},
@@ -911,7 +948,7 @@ function step(quiet){
     if(s.f.lyso&&f.S<.7&&rnd()<.06*DT){a.d=1;continue}
     let hz=.006+(f.S<.6?(.6-f.S)*.5:0);if(!st.rival&&G.refuges.length&&inRefuge(a))hz*=.3;if(st.guard>G.t)hz*=.3;
     if(a.e<(s.f.store?-.6:0)||rnd()<hz*DT){a.d=1;P.nutr[c]=Math.min(P.nutr[c]+.35,COND[c].nutr*3+2.5);continue}
-    if(a.e>=2){if(cellCount[c]<DENS&&n+born.length<(LITE?Math.round(MAXA*.6):MAXA)){a.e-=1;const ch={x:clamp(a.x+(rnd()-.5)*5,1,W-1),y:clamp(a.y+(rnd()-.5)*5,1,H-1),vx:-a.vx,vy:-a.vy,e:1,s:a.s,t:rnd()};
+    if(a.e>=2){if(cellCount[c]<DENS&&n+born.length<(LITE?Math.round(MAXA*.6):MAXA)){a.e-=1;let ox=(rnd()-.5)*5,oy=(rnd()-.5)*5;if(s.f.sessile){const an=rnd()*6.283,dd=(st.traits.includes('airspores')?38:st.traits.includes('seeds')?30:12)*(.4+rnd()*.8);const tx=clamp(a.x+Math.cos(an)*dd,1,W-1),ty=clamp(a.y+Math.sin(an)*dd,1,H-1);if(fitGet(st,cellAt(tx,ty)).w>=.7){ox=tx-a.x;oy=ty-a.y}}const ch={x:clamp(a.x+ox,1,W-1),y:clamp(a.y+oy,1,H-1),vx:-a.vx,vy:-a.vy,e:1,s:a.s,t:rnd()};
       mutate(ch,st,f,c);born.push(ch);cellCount[c]++;}else a.e=1.9;}
     // movement
     const spd=s.disp*11;
@@ -921,8 +958,9 @@ function step(quiet){
       let ang;if(best!==c){const[tx,ty]=cc(best);ang=Math.atan2(ty-a.y,tx-a.x)+(rnd()-.5)*.8;a.vx=Math.cos(ang)*spd;a.vy=Math.sin(ang)*spd}
       else{ang=rnd()*6.283;a.vx=Math.cos(ang)*spd*.3;a.vy=Math.sin(ang)*spd*.3}}}
     else{a.vx*=.9;a.vy*=.9}
-    let ux=a.vx+(rnd()-.5)*110,uy=a.vy+(rnd()-.5)*110,pushed=false;
-    for(const cu of curs){const dx=cu.x2-cu.x1,dy=cu.y2-cu.y1,L2=dx*dx+dy*dy||1;let t=((a.x-cu.x1)*dx+(a.y-cu.y1)*dy)/L2;t=clamp(t,0,1);const px=cu.x1+dx*t,py=cu.y1+dy*t;
+    const onLand=BIOMES[G.tb[c]].land;const jit=s.f.sessile?0:onLand?38:110;let ux=s.f.sessile?0:a.vx+(rnd()-.5)*jit,uy=s.f.sessile?0:a.vy+(rnd()-.5)*jit,pushed=false;
+    if(!s.f.sessile&&G.flow&&G.flow[c]>=0){const[tx,ty]=cc(G.flow[c]);const L=Math.hypot(tx-a.x,ty-a.y)||1;ux+=(tx-a.x)/L*22;uy+=(ty-a.y)/L*22}
+    if(!s.f.sessile)for(const cu of curs){const dx=cu.x2-cu.x1,dy=cu.y2-cu.y1,L2=dx*dx+dy*dy||1;let t=((a.x-cu.x1)*dx+(a.y-cu.y1)*dy)/L2;t=clamp(t,0,1);const px=cu.x1+dx*t,py=cu.y1+dy*t;
       if((a.x-px)**2+(a.y-py)**2<48*48){const L=Math.sqrt(L2);ux+=dx/L*70;uy+=dy/L*70;pushed=true}}
     if(!pushed){const c2=cellAt(a.x+ux*DT,a.y+uy*DT);if(c2!==c&&f.w>=.8&&fitGet(st,c2).w<.45){ux=-ux*.5;uy=-uy*.5;a.vx=-a.vx;a.vy=-a.vy}}
     a.x+=ux*DT;a.y+=uy*DT;if(a.x<1){a.x=1;a.vx=Math.abs(a.vx)}if(a.x>W-1){a.x=W-1;a.vx=-Math.abs(a.vx)}if(a.y<1){a.y=1;a.vy=Math.abs(a.vy)}if(a.y>H-1){a.y=H-1;a.vy=-Math.abs(a.vy)}
@@ -978,11 +1016,11 @@ const players=()=>Object.values(G.species).filter(s=>s.alive&&!s.rival);
 const rivals=()=>Object.values(G.species).filter(s=>s.alive&&s.rival);
 function spCount(id){let n=0;for(const k in G.strains)if(G.strains[k].sp===+id)n+=G.strains[k].n;return n}
 function domStrain(id){let d=null;for(const k in G.strains){const s=G.strains[k];if(s.sp===+id&&(!d||s.n>d.n))d=s}return d}
-const MS={photo:['Oxygenic photosynthesis',40],aerobic:['Aerobic respiration',60],land:['Life on land or ice',80],consort:['Syntrophic consortium',50],swarm:['Microbial wolf packs',80],euk:['Eukaryotic cell',120],multi:['Multicellularity',200],fungus:['Fungi',150],lichen:['Lichens',150],reef:['Vent reefs',220],icecol:['Ice-lattice colonies',220],plant:['Land plants',250],animal:['Animals',250]};
+const MS={fresh:['Into fresh water',60],photo:['Oxygenic photosynthesis',40],aerobic:['Aerobic respiration',60],land:['Life on land or ice',80],consort:['Syntrophic consortium',50],swarm:['Microbial wolf packs',80],euk:['Eukaryotic cell',120],multi:['Multicellularity',200],fungus:['Fungi',150],lichen:['Lichens',150],reef:['Vent reefs',220],icecol:['Ice-lattice colonies',220],plant:['Land plants',250],animal:['Animals',250]};
 const MSF={photo:'oxy',aerobic:'aerobic',consort:'consort',swarm:'swarm',euk:'euk',multi:'multi',fungus:'fungus',lichen:'lichen',reef:'reef',icecol:'icecol',plant:'vascular',animal:'bilat'};
 function checkMs(){const got=k=>{if(!G.ms[k]){G.ms[k]=G.epoch;addSway(15);sfx('milestone');logp('ms',`Milestone: ${MS[k][0]} (+${MS[k][1]} score, +15 sway)`);if(k!=='photo'&&k!=='aerobic'){tip('transition')}if(k!=='photo'&&k!=='aerobic')G.cele={label:MS[k][0],t:(typeof performance!=='undefined'?performance.now():0)}}};
   for(const id in G.strains){const s=G.strains[id];if(s.rival||s.n<20)continue;for(const k in MSF)if(s.sc.f[MSF[k]])got(k)}
-  let ln=0;for(const a of G.agents){const b=G.tb[a.c];if((b==='land'||b==='soil'||b==='ice')&&!G.strains[a.s].rival)ln++}if(ln>=15)got('land');}
+  let ln=0;for(const a of G.agents){const b=G.tb[a.c];if((b==='land'||b==='soil'||b==='ice')&&!G.strains[a.s].rival)ln++}if(ln>=15)got('land');let fw=0;for(const a of G.agents){const b=G.tb[a.c];if((b==='river'||b==='lake')&&!G.strains[a.s].rival)fw++}if(fw>=12)got('fresh');}
 function scoreParts(){const p=players();let cells=0;for(const id in G.strains)if(!G.strains[id].rival)cells+=G.strains[id].n;const bio=Math.round(cells/8);const ln=p.length*30;let ms=0;for(const k in G.ms)ms+=MS[k][1];const rv=G.rivalsExtinct*50;const gl=(G.goalsDone||0)*60;const sn=(G.speciations||0)*25;const base=bio+ln+ms+rv+gl+sn;const mult=chalMult();return{bio,ln,ms,rv,gl,sn,mult,base,total:Math.round(base*mult),cells}}
 function rank(t){const m=G.ms;if(m.animal||m.plant)return 'Architect of complex life';if(m.reef||m.icecol||m.lichen||m.fungus)return 'Founder of an alien biosphere';if(m.multi)return 'Multicellular pioneer';if(m.euk)return 'Eukaryotic pioneer';return t<200?'Pond scum':t<450?'Microbial mat':'Master of the microbial world'}
 
@@ -1060,7 +1098,7 @@ function rivalSpeciate(){const R=rivals();if(R.length>=RIVALN+2||G.epoch<3)retur
     sp.split=G.epoch;ns.split=G.epoch;logp('rival',`${sp.name} split in two: an isolated population became a new rival species, ${ns.name}.`);return}}
 function beginDraft(){
   const prevEv=G.ev&&G.ev.done?G.ev.rolled:null;if(G.opp){G.opp=null;if(G.oppPrev){G.speed=G.oppPrev;G.oppPrev=0}UI.oppDirty=true}
-  domesticate();try{seasonTick()}catch(e){}if(G.bgDirty){G.bgDirty=0;try{buildBG()}catch(e){}}G.dlgMin=false;
+  if(G.specCard){G.specQ=[];G.specCard=null;G.specPrev=null}domesticate();try{seasonTick()}catch(e){}if(G.bgDirty){G.bgDirty=0;try{buildBG()}catch(e){}}G.dlgMin=false;
   G.mode='draft';try{recordAlbum()}catch(e){}try{buildRecap(prevEv)}catch(e){G.recap=null}G.lastEpT0=G.t-G.et;G.et=0;G.chance={loads:0,gains:0,losses:0,hgt:0,natural:[]};G.surprised=false;forecast();markAerobicShare();G.draft={};
   newGoal();
   rivals().forEach(sp=>{const d=frontierStrain(sp.id);if(!d)return;const hand=drawHand(d).filter(t=>t!=='wild');if(!hand.length)return;let t;
@@ -1112,7 +1150,7 @@ function focusMatch(){const f=G.focus;if(!f)return null;const t0=epochBorn();
   if(f==='mine')return st=>!st.rival;if(f==='rival')return st=>!!st.rival;
   if(f==='top'){const d=topStrain();const id=d?d.id:-1;return st=>st.id===id}
   if(f==='new')return st=>!st.rival&&(st.born>=t0-.01&&st.hl||st.seed&&st.born>=t0-.01);
-  if(typeof f==='number')return st=>st.id===f;return null}
+  if(typeof f==='number')return st=>st.id===f;if(typeof f==='string'&&f.startsWith('sp:')){const id=+f.slice(3);return st=>st.sp===id}return null}
 function computeLegend(){let mine=0,rv=0,nw=0;const t0=epochBorn();for(const a of G.agents){const st=G.strains[a.s];if(!st)continue;if(st.rival)rv++;else{mine++;if(st.born>=t0-.01&&(st.hl||st.seed))nw++}}
   const d=topStrain();let pos=null;if(d){const m=new Map();for(const a of G.agents)if(a.s===d.id)m.set(a.c,(m.get(a.c)||0)+1);let bc=null,bn=0;for(const[c,n]of m)if(n>bn){bn=n;bc=c}if(bc!=null){let sx=0,sy=0,k=0;for(const a of G.agents)if(a.s===d.id&&a.c===bc){sx+=a.x;sy+=a.y;k++}pos={x:sx/k,y:sy/k}}}
   G._top=d?{id:d.id,pos}:null;if(typeof G.focus==='number'){const fs=G.strains[G.focus];if(!fs||fs.n<1)G.focus=null}return{mine,rv,nw,d}}
@@ -1121,6 +1159,7 @@ function renderLegend(){const el=document.getElementById('legend');if(!el)return
   let h='<span class="lab">Highlight</span>'+b('mine','mine','Your cells',L.mine,'Dim everything except your lineage')+b('rival','rv','Rivals',L.rv,'Dim everything except rival lineages')+
    (L.d?b('top','top',`Top strain <span class="mono" style="color:var(--muted)">${L.d.code}</span>`,L.d.n,'Your most common strain. The star on the map marks where it is densest.'):'')+
    b('new','new','New this epoch',L.nw,'Mutants that arose or were seeded this epoch');
+  if(typeof f==='string'&&f.startsWith('sp:')){const q=G.species[+f.slice(3)];if(q)h+=`<button class="lg" data-act="focus" data-v="${f}" aria-pressed="true"><i class="sw" style="background:${spColor(q)}"></i>Species <i>${esc(q.name.split(' ')[1]||q.name)}</i></button>`}
   if(typeof f==='number'){const st=G.strains[f];if(st)h+=`<button class="lg" data-act="focus" data-v="${f}" aria-pressed="true"><i class="sw" style="background:${strainColor(st)}"></i>Strain <span class="mono">${st.code}</span> <span class="n">${st.n}</span></button>`}
   if(f!=null)h+='<button class="lg clear" data-act="focus" data-v="">Show all ✕</button>';el.innerHTML=h}
 function drawFocusAndMarkers(tnow){const A=G.agents;const m=focusMatch();const K=MK=Math.max(.6,Math.min(2.6,.75/((cv.clientWidth||W)/W*CAM.z)));
@@ -1270,8 +1309,8 @@ function renameSpecies(sp,major,cons){const old={name:sp.name,code:sp.code,e0:sp
   G.speciations=(G.speciations||0)+1;addSway(5);UI.speciesKey='';albumKey='';recordAlbum();
   const why=major?`${TR[major].name} swept the population`:'enough new genes piled up';
   logp('ms',`New species: ${old.name} has evolved into ${nm} (${why}). The old name is now an ancestor on your family tree. +25 score, +5 sway.`);
-  toast('A new species',`${old.name} → ${nm}. ${major?'A big transition earns a new genus.':'Enough change for a new name.'}`,'wild');sfx('milestone');
-  const c=densestWith(sp.id,()=>true);addMarker(c,nm,'#FFD76A',10);G.cele={t:performance.now()}}
+sfx('milestone');
+  const c=densestWith(sp.id,()=>true);addMarker(c,nm,'#FFD76A',10);G.cele={t:performance.now()};specAlert(sp,nm,`${old.name} has changed so much (${why}) that it now counts as a new species. Nothing split off: the whole population carries the new name, and the old one becomes its ancestor on your family tree.`)}
 function splitSpecies(sp,strains,keepOldName){const ids=new Set(strains.map(q=>q.id));
   let bs=strains[0];for(const q of strains)if(q.n>bs.n)bs=q;
   const oh=keepOldName&&sp.hist&&sp.hist.length?sp.hist[sp.hist.length-1]:null;const nm=oh?oh.name:latinName(sp.name.split(' ')[0],newEpithet());
@@ -1285,21 +1324,23 @@ function speciationCheck(){if(G.mode!=='run'||G.epoch<2)return;for(const sp of p
     if(!major&&minorD<4)continue;
     // ancestral holdouts: cells still lacking the new major trait (or still close to the old genome)
     const S=Object.values(G.strains).filter(q=>q.sp===sp.id&&q.n>0);const old=S.filter(q=>major?!q.traits.includes(major):gdist(q.traits,base)<=1);const oldN=old.reduce((a,q)=>a+q.n,0);
-    let split=null;if(players().length<4&&oldN>=30&&oldN>=tot*.12&&oldN<=tot*.45){const oid=new Set(old.map(q=>q.id));let ox=0,oy=0,on=0,nx=0,ny=0,nn=0;const oc=new Set(),nc=new Set();
+    let split=null;if(players().length<6&&G.t-(G.lastSplit||-99)>15&&oldN>=30&&oldN>=tot*.12&&oldN<=tot*.45){const oid=new Set(old.map(q=>q.id));let ox=0,oy=0,on=0,nx=0,ny=0,nn=0;const oc=new Set(),nc=new Set();
       for(const a of G.agents){const q=G.strains[a.s];if(!q||q.sp!==sp.id)continue;if(oid.has(q.id)){ox+=a.x;oy+=a.y;on++;oc.add(a.c)}else{nx+=a.x;ny+=a.y;nn++;nc.add(a.c)}}
       if(on&&nn){const dd=Math.hypot(ox/on-nx/nn,oy/on-ny/nn);let ov=0;for(const c of oc)if(nc.has(c))ov++;if(dd>220&&ov/oc.size<.3)split=old}}
     const oldName=sp.name;renameSpecies(sp,major,cons);
-    if(split){const ns=splitSpecies(sp,split,true);logp('good',`The ancestors lived on: an isolated population of ${oldName} kept the old ways and survives as a sister species.`);toast('Lineage split',`${oldName} survives in isolation as a sister species of ${sp.name}.`,'wild')}
+    if(split){const ns=splitSpecies(sp,split,true);G.lastSplit=G.t;logp('good',`The ancestors lived on: an isolated population of ${oldName} kept the old ways and survives as a sister species.`);specAlert(ns,ns.name,`While most of ${oldName} evolved into ${sp.name}, a separate population far away kept the old way of life. It survives as a sister species.`)}
     return}}
-function speciesSplitCheck(){if(G.mode!=='run'||G.epoch<3||players().length>=4)return;for(const sp of players()){if((sp.splitChk||0)===G.epoch)continue;sp.splitChk=G.epoch;
+function speciesSplitCheck(){if(G.mode!=='run'||G.epoch<3||players().length>=6||G.t-(G.lastSplit||-99)<15)return;for(const sp of players()){if((sp.splitChk||0)===G.epoch)continue;sp.splitChk=G.epoch;
     const S=Object.values(G.strains).filter(q=>q.sp===sp.id&&q.n>0);if(S.length<2)continue;const tot=S.reduce((a,q)=>a+q.n,0);let d=S[0];for(const q of S)if(q.n>d.n)d=q;
-    const div=S.filter(q=>gdist(q.traits,d.traits)>=3);const dn=div.reduce((a,q)=>a+q.n,0);if(dn<30||dn<tot*.1||dn>tot*.49)continue;
+    const div=S.filter(q=>gdist(q.traits,d.traits)>=3);const dn=div.reduce((a,q)=>a+q.n,0);if(dn<25||dn<tot*.08||dn>tot*.49)continue;
+    const far4=div.filter(q=>gdist(q.traits,d.traits)>=4);const fn=far4.reduce((a,q)=>a+q.n,0);if(fn>=25&&fn>=tot*.08){const ns=splitSpecies(sp,far4,false);G.lastSplit=G.t;logp('ms',`Speciation: strains of ${sp.name} that differ by 4+ genes became their own species, ${ns.name}.`);sfx('isolate');specAlert(ns,ns.name,`Some strains of ${sp.name} now differ from the rest by ${gdist(far4[0].traits,d.traits)} genes and live a different way of life, so they count as a separate species (ecological speciation). In microbes, species are defined by how different their genomes are.`);return}
     const did=new Set(div.map(q=>q.id));let ox=0,oy=0,on=0,nx=0,ny=0,nn=0;const oc=new Set(),nc=new Set();
     for(const a of G.agents){const q=G.strains[a.s];if(!q||q.sp!==sp.id)continue;if(did.has(q.id)){ox+=a.x;oy+=a.y;on++;oc.add(a.c)}else{nx+=a.x;ny+=a.y;nn++;nc.add(a.c)}}
-    if(!on||!nn)continue;const dd=Math.hypot(ox/on-nx/nn,oy/on-ny/nn);let ov=0;for(const c of oc)if(nc.has(c))ov++;if(dd<220||ov/oc.size>=.3)continue;
-    const ns=splitSpecies(sp,div,false);logp('ms',`Speciation: a distant population of ${sp.name} drifted ${gdist(div[0].traits,d.traits)} genes apart and became its own species, ${ns.name}. Both are yours.`);
-    toast('A new species',`${ns.name} split off from ${sp.name}, far away and genetically distinct.`,'wild');sfx('isolate');addMarker(densestWith(ns.id,()=>true),ns.name,'#B9F0A0',10);return}}
+    if(!on||!nn)continue;const dd=Math.hypot(ox/on-nx/nn,oy/on-ny/nn);let ov=0;for(const c of oc)if(nc.has(c))ov++;if(dd<200||ov/oc.size>=.35)continue;
+    const ns=splitSpecies(sp,div,false);G.lastSplit=G.t;logp('ms',`Speciation: a distant population of ${sp.name} drifted ${gdist(div[0].traits,d.traits)} genes apart and became its own species, ${ns.name}. Both are yours.`);
+    sfx('isolate');addMarker(densestWith(ns.id,()=>true),ns.name,'#B9F0A0',10);specAlert(ns,ns.name,`A far-off population of ${sp.name} was cut off from the rest and drifted ${gdist(div[0].traits,d.traits)} genes apart. Separated populations stop mixing genes and become new species (allopatric speciation).`);return}}
 /* family tree (Tree tab) */
+
 function familyTreeHTML(){const L=Object.values(G.species||{}).filter(q=>!q.rival);if(!L.length)return '';const ME=MAXE;const E=Math.max(1,Math.min(G.epoch,ME));
   const rows=[];const order=[];const visit=(q,dep)=>{order.push({q,dep});L.filter(c=>c.parent===q.id).sort((a,b)=>(a.splitAt||0)-(b.splitAt||0)).forEach(c=>visit(c,dep+1))};L.filter(q=>q.parent==null||!G.species[q.parent]||G.species[q.parent].rival).forEach(q=>visit(q,0));
   const W2=320,rowH=40,top=18,lx=8,rx=W2-8;const X=e=>lx+(rx-lx)*((e-1)/Math.max(1,ME-1));const H2=top+order.length*rowH+8;
@@ -1537,7 +1578,7 @@ function doBurst(x,y){const k=swayCost('burst');if(G.sway<k)return flash(`Not en
 function doRefuge(x,y){const k=swayCost('refuge');if(G.sway<k)return flash(`Not enough sway (${k} needed).`);sfx('refuge');R_().aid=(R_().aid||0)+1;G.sway-=k;G.refuges.push({x,y,r:72,until:G.t+25});logp('info','A refuge opened. Your cells inside die far less often for 25 s.')}
 function doCurrent(x1,y1,x2,y2){if(Math.hypot(x2-x1,y2-y1)<30)return;const k=swayCost('current');if(G.sway<k)return flash(`Not enough sway (${k} needed).`);sfx('current');R_().aid=(R_().aid||0)+1;G.sway-=k;G.currents.push({x1,y1,x2,y2,until:G.t+20});logp('info','You stirred a current. It will carry any cell along it for 20 s.')}
 function doIsolate(x,y){const sp=G.species[G.sel];if(!sp||sp.rival||!sp.alive)return flash('Select one of your species first.');
-  if(players().length>=4)return flash('You already have 4 species.');if(G.sway<swayCost('isolate'))return flash(`Not enough sway (${swayCost('isolate')} needed).`);
+  if(players().length>=6)return flash('You already have 6 species.');if(G.sway<swayCost('isolate'))return flash(`Not enough sway (${swayCost('isolate')} needed).`);
   const inR=G.agents.filter(a=>G.strains[a.s].sp===sp.id&&(a.x-x)**2+(a.y-y)**2<60*60);if(inR.length<6)return flash('Need at least 6 cells of the selected species inside the circle.');
   const cnt={};inR.forEach(a=>cnt[a.s]=(cnt[a.s]||0)+1);const fs=G.strains[Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0]];
   const genus=sp.name.split(' ')[0];const used=Object.values(G.species).map(s=>epiStem(s.name.split(' ')[1]));const ep=pick(EPI.filter(e=>!used.includes(epiStem(e))).concat(['novus']));
@@ -1556,7 +1597,7 @@ function mk(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;r
 /* ---------------- terrain painter: organic coastlines, depth, polar ice, vent fissures ---------------- */
 function hnoise(seed){const h=(x,y)=>{let n=(x*374761393+y*668265263+seed*1442695041)|0;n=(n^(n>>>13))*1274126177|0;return((n^(n>>>16))>>>0)/4294967296};
   const sm=t=>t*t*(3-2*t);return(x,y)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=sm(x-xi),yf=sm(y-yi);const a=h(xi,yi),b=h(xi+1,yi),c=h(xi,yi+1),d=h(xi+1,yi+1);return a+(b-a)*xf+(c-a)*yf+(a-b-c+d)*xf*yf}}
-const TCOL={soil:[78,84,46],deep:[16,46,74],vent:[30,34,52],shallow:[40,142,152],tidal:[156,138,96],land:[104,94,84],spring:[150,108,56],ice:[218,230,238],brine:[92,150,172]};
+const TCOL={soil:[78,84,46],mountain:[146,138,128],river:[104,94,84],lake:[104,94,84],deep:[16,46,74],vent:[30,34,52],shallow:[40,142,152],tidal:[156,138,96],land:[104,94,84],spring:[150,108,56],ice:[218,230,238],brine:[92,150,172]};
 function paintTerrain(){const R=2,pw=Math.ceil(W/R),ph=Math.ceil(H/R);const cnv=mk(pw,ph),x=cnv.getContext('2d');const img=x.createImageData(pw,ph);const D=img.data;
   const n1=hnoise(G.seed%100003),n2=hnoise((G.seed*7+13)%100003),n3=hnoise((G.seed*3+5)%100003);const cls=new Uint8Array(pw*ph);const pl=PLANETS[G.planet];
   const distAt=(gx,gy)=>{const x0=clamp(Math.floor(gx-.5),0,GX-1),y0=clamp(Math.floor(gy-.5),0,GY-1),x1=Math.min(GX-1,x0+1),y1=Math.min(GY-1,y0+1);const fx=clamp(gx-.5-x0,0,1),fy=clamp(gy-.5-y0,0,1);const d=(a,b)=>Math.min(14,G.dist[b*GX+a]);return d(x0,y0)*(1-fx)*(1-fy)+d(x1,y0)*fx*(1-fy)+d(x0,y1)*(1-fx)*fy+d(x1,y1)*fx*fy};
@@ -1568,12 +1609,12 @@ function paintTerrain(){const R=2,pw=Math.ceil(W/R),ph=Math.ceil(H/R);const cnv=
     let O=0,Dd=0;for(let k=0;k<4;k++){O+=isO[cs[k]]*ws[k];Dd+=isD[cs[k]]*ws[k]}
     const want=O<.5?0:(Dd>=.5*O?1:2);const okc=q=>want===0?!isO[q]:want===1?isD[q]:(isO[q]&&!isD[q]);let c=clamp(Math.floor(wyp),0,GY-1)*GX+clamp(Math.floor(wxp),0,GX-1);let bw=-1;if(!okc(c)){c=-1;for(let k=0;k<4;k++){const q=cs[k];const ok=want===0?!isO[q]:want===1?isD[q]:(isO[q]&&!isD[q]);if(ok&&ws[k]>bw){bw=ws[k];c=q}}}
     if(c<0)c=clamp(Math.floor(wyp),0,GY-1)*GX+clamp(Math.floor(wxp),0,GX-1);
-    let t=G.tb[c];if(t==='vent')t='deep';const b=BIOMES[t];let col=TCOL[t]||b.col;let r=col[0],g=col[1],bl=col[2];
+    let t=G.tb[c];if(t==='vent')t='deep';if(t==='river'||t==='lake')t='land';const b=BIOMES[t];let col=TCOL[t]||b.col;let r=col[0],g=col[1],bl=col[2];
     const tex=n3(gx*6,gy*6)-.5;
     if(t==='deep'||t==='vent'){const d=distAt(gx,gy);const f=1-.55*Math.min(1,Math.max(0,d-2)/10);r*=f;g*=f;bl*=f;cls[py*pw+px]=1}
     else if(t==='shallow'){const d=distAt(gx,gy);const f=1+.22*Math.max(0,2.2-d)/2.2;r*=f;g*=f;bl*=f;r+=tex*10;g+=tex*12;bl+=tex*10;cls[py*pw+px]=2}
     else if(b.ocean){cls[py*pw+px]=2}
-    else{r+=tex*26;g+=tex*24;bl+=tex*22;cls[py*pw+px]=t==='ice'?4:3}
+    else{r+=tex*26;g+=tex*24;bl+=tex*22;cls[py*pw+px]=t==='ice'?4:3;if(t==='mountain'){const hs=(n1(gx*3+1,gy*3)-n1(gx*3,gy*3+1))*60;r+=hs;g+=hs;bl+=hs;const sn=n2(gx*2.2+7,gy*2.2)*.6+n3(gx*5,gy*5)*.4;if(sn>.66){const k=Math.min(.6,(sn-.66)*3);r=r*(1-k)+238*k;g=g*(1-k)+242*k;bl=bl*(1-k)+246*k}}}
     if(G.pol[c]){if(b.ocean){const fl=n1(gx*1.7+40,gy*1.7)*.7+n2(gx*4.5,gy*4.5)*.3;const k=fl>.5?.94:.8;r=r*(1-k)+214*k;g=g*(1-k)+232*k;bl=bl*(1-k)+244*k}else{const k=.86;r=r*(1-k)+240*k;g=g*(1-k)+244*k;bl=bl*(1-k)+248*k}}
     if(pl&&pl.tint){const o=pl.tint(c,[r,g,bl]);r=o[0];g=o[1];bl=o[2]}
     const i=(py*pw+px)*4;D[i]=clamp(r,0,255);D[i+1]=clamp(g,0,255);D[i+2]=clamp(bl,0,255);D[i+3]=255}
@@ -1624,7 +1665,7 @@ function buildBG(){
       rings.forEach(([r,col])=>{b.fillStyle=col;b.beginPath();b.ellipse(x+ox,y+oy,r,r*.85,0,0,6.283);b.fill()});}
     if(t==='tidal'){b.fillStyle='rgba(60,50,32,.35)';for(let k=0;k<5;k++){b.beginPath();b.arc(x+(rnd()-.5)*26,y+(rnd()-.5)*26,1.5+rnd()*2.5,0,6.283);b.fill()}}
     if(t==='land'){b.strokeStyle='rgba(20,18,16,.35)';b.lineWidth=1;b.beginPath();let px=x+(rnd()-.5)*20,py=y+(rnd()-.5)*20;b.moveTo(px,py);for(let k=0;k<3;k++){px+=(rnd()-.5)*14;py+=(rnd()-.5)*14;b.lineTo(px,py)}b.stroke()}}
-  paintVents(b);
+  paintVents(b);try{paintRelief(b)}catch(e){}
   // masks
   const mask=(pred,col)=>{const sm=mk(GX,GY),s=sm.getContext('2d'),im=s.createImageData(GX,GY);for(let c=0;c<NC;c++)if(pred(c))im.data.set([...col,255],c*4);s.putImageData(im,0,0);const m=mk(W,H),mc=m.getContext('2d');mc.imageSmoothingEnabled=true;mc.drawImage(sm,0,0,W,H);return m};
   OCEANM=mask(c=>BIOMES[G.tb[c]].ocean,[110,220,160]);EXPOSEDM=mask(c=>BIOMES[G.tb[c]].uv>0,[190,120,255]);
@@ -1964,7 +2005,7 @@ function previewClick(e){if(!G||G.mode!=='setup'||G.world==='history'||(G.sstep|
   let best=-1,bd=1e9;G.founders.forEach((f,i)=>{const[fx,fy]=cc(f.cell);const d=(fx-x)**2+(fy-y)**2;if(d<bd){bd=d;best=i}});if(best>=0&&bd<90*90){act('founder',{id:best})}}
 function drawPreview(){const pc=document.getElementById('setupcv');if(!pc||document.getElementById('setupov').hidden)return;const w=pc.clientWidth,h=pc.clientHeight;if(!w||!h)return;const r=Math.min(2,window.devicePixelRatio||1);
   if(pc.width!==Math.round(w*r)||pc.height!==Math.round(h*r)){pc.width=Math.round(w*r);pc.height=Math.round(h*r)}const c=pc.getContext('2d');c.imageSmoothingQuality='high';c.drawImage(cv,0,0,pc.width,pc.height)}
-function mapNoteHTML(){if((G.sstep||1)===1)return `<span class="lgb" style="--c:#0C2338">Deep ocean</span><span class="lgb" style="--c:#2C8E98">Shallow sea</span><span class="lgb" style="--c:#FF9A5A">Vents (glowing cracks)</span><span class="lgb" style="--c:#9C8A60">Tidal flats</span><span class="lgb" style="--c:#685E54">Bare rock</span><span class="lgb" style="--c:#C89048">Hot springs</span><span class="lgb" style="--c:#E2EEF6">Polar zones</span><span class="lgb" style="--c:#5C96AC">Brine</span>`;
+function mapNoteHTML(){if((G.sstep||1)===1)return `<span class="lgb" style="--c:#0C2338">Deep ocean</span><span class="lgb" style="--c:#2C8E98">Shallow sea</span><span class="lgb" style="--c:#FF9A5A">Vents (glowing cracks)</span><span class="lgb" style="--c:#9C8A60">Tidal flats</span><span class="lgb" style="--c:#685E54">Bare rock</span><span class="lgb" style="--c:#9A9086">Mountains</span><span class="lgb" style="--c:#3A88A4">Rivers and lakes</span><span class="lgb" style="--c:#C89048">Hot springs</span><span class="lgb" style="--c:#E2EEF6">Polar zones</span><span class="lgb" style="--c:#5C96AC">Brine</span>`;
   return `<span>Gold ring: where your founder starts. Dashed rings: rivals.${G.world==='history'?'':' Tap a ring to choose that founder.'}</span>`}
 function worldCardHTML(){const P=PLANETS[G.planet];const d=PDIFF[G.planet]||1;return `<details class="wcard"><summary><span class="eyebrow">This world · ${shareCode()}</span> <b>${G.world==='history'?'Earth':P.name}</b> <span class="why">${ARCH[G.arch].name}${G.world==='history'?'':` · difficulty ${'●'.repeat(d)}${'○'.repeat(5-d)}`}</span></summary><div class="optsbody">${G.world!=='history'?`<p class="why">${P.desc}</p>`:''}<div class="wtraits">${G.traits.map(k=>`<div><b>${WTRAITS[k].name}</b> <span>${WTRAITS[k].fx}</span></div>`).join('')}</div></div></details>`}
 function renderWorldCard(){const el=document.getElementById('worldinfo');if(!el)return;if(!G||G.mode==='setup'){el.hidden=true;return}const k=G.code+G.planet+G.world;if(el._k!==k){el._k=k;el.innerHTML=worldCardHTML()}el.hidden=false}
@@ -2079,7 +2120,7 @@ function howHTML(){return `<h2>How to play</h2><ol class="howto">
   <li><b>Pick a founder.</b> Each random world offers three starting microbes. Each one starts wherever its genes fit best. Look at <i>growth</i> (above 1 means it can grow) and <i>room</i> (how many cells the area can feed).</li>
   <li><b>Seed a mutation each epoch.</b> Time stops between epochs. Pick one gene card, then click the map to place a dozen mutant cells. Green patches are where that gene helps. Selection and luck decide if it spreads. Gene slots are limited, so new genes can push old ones out. Picks cost sway (4 for a small gene, 15 for a big transition); the 🎲 wild card is a free gamble.</li>
   <li><b>Watch and react.</b> Every dot is a cell that eats, divides, mutates, and dies. Forecasts warn you about events. Spend <i>sway</i> on refuges, currents, isolation, and opportunities that pop up mid-epoch.</li>
-  <li><b>Shape the planet.</b> Mats and lichens turn rock into soil, burrowing animals stir up nutrients, and huge blooms of photosynthesizers cool the climate.</li><li><b>Climb the tree of life.</b> Stack genes to become a eukaryote, then multicellular, then a plant, animal, fungus, lichen, vent reef, or ice colony, depending on your world.</li></ol>
+  <li><b>Shape the planet.</b> Rivers run from mountains to the sea; marine cells need osmoregulation to follow them inland. Mats and lichens turn rock into soil, burrowing animals stir up nutrients, and huge blooms of photosynthesizers cool the climate.</li><li><b>Climb the tree of life.</b> Stack genes to become a eukaryote, then multicellular, then a plant, animal, fungus, lichen, vent reef, or ice colony, depending on your world.</li></ol>
   <div class="keys"><span><kbd>Space</kbd> pause</span><span><kbd>1</kbd>–<kbd>4</kbd> speed</span><span>Tap any dotted word for a definition</span></div>
   <div class="btnrow"><button class="btn" data-act="t-tutorial">Play the tutorial</button><button class="btn ghost" data-act="t-back">Back</button></div>`}
 function settingsHTML(){return `<h2>Settings</h2><div class="setlist">
@@ -2151,7 +2192,7 @@ function act(a,d){if(TUTI>=0&&G&&G.tut)tutEvent(a);switch(a){
   case't-world':LASTW=d.v;if(G&&G.mode==='setup'&&G.world!==d.v){makeWorld(G.seed,d.v);buildBG();UI.speciesKey=''}renderTitle();break;
   case'tut-next':if(TUTI>=0){const st=TUT[TUTI];if(st.wait==='seed'&&G.mode==='draft'){}tutGo(TUTI+1)}break;
   case'tut-skip':tutEnd();break;
-  case'focus':{const v=d.v;const nv=v===''?null:isNaN(+v)?v:+v;G.focus=G.focus===nv?null:nv;break}
+  case'focus':{const v=d.v;const nv=v===''?null:(isNaN(+v)?v:+v);G.focus=G.focus===nv?null:nv;break}
   case'fstrain':{const id=+d.id;G.focus=G.focus===id?null:id;break}
   case'speed':if(G.mode==='run')G.speed=+d.v;break;
   case'tool':G.tool=d.v;break;
@@ -2169,6 +2210,8 @@ function act(a,d){if(TUTI>=0&&G&&G.tut)tutEvent(a);switch(a){
   case'resume':if(G.mode==='setup'&&resumeGame()){applyTab()}break;
   case'discard':clearSave();break;
   case'rivals':setRivals(+d.v);break;
+  case'specok':UI.specDirty=true;nextSpecAlert();break;
+  case'specpause':SPECPAUSE=!SPECPAUSE;try{localStorage.setItem('deeptime_specpause',SPECPAUSE?'1':'0')}catch(e){}if(!SPECPAUSE&&G.specPrev!=null&&G.mode==='run'){G.speed=G.specPrev||1;G.specPrev=null}UI.specDirty=true;break;
   case'wsize':case't-wsize':WSIZE=d.v;try{localStorage.setItem('deeptime_size',WSIZE)}catch(e){}if(G&&G.mode==='setup'){const fp=G.forcedPlanet,ch=G.chal;FORCE_PLANET=fp||null;makeWorld(G.seed,G.world);FORCE_PLANET=null;if(fp){G.forcedPlanet=fp;G.chal=ch}buildBG();UI.speciesKey=''}if(a==='t-wsize')renderTitle();break;
   case'zoom':if(d.v==='fit')camReset();else camZoom(d.v==='in'?1.5:1/1.5);break;
   case'sstep':if(G.mode==='setup'){G.sstep=+d.v;const so=document.getElementById('setupov');if(so)so.scrollTop=0;UI.somap=''}break;
@@ -2234,7 +2277,7 @@ cv.addEventListener('pointerup',e=>{if(drag){doCurrent(drag.x1,drag.y1,drag.x2,d
 let lastUI=0,lastSlow=0;
 let SIDE_TAB='world';try{SIDE_TAB=localStorage.getItem('deeptime_tab')||'world'}catch(e){}
 function applyTab(){try{localStorage.setItem('deeptime_tab',SIDE_TAB)}catch(e){}document.querySelectorAll('.pane').forEach(p=>p.hidden=p.dataset.pane!==SIDE_TAB);document.querySelectorAll('.sidetabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.v===SIDE_TAB)))}
-function renderOpp(){const el=$('#opp');const o=G.opp;if(!o){if(!el.hidden){el.hidden=true;el.innerHTML=''}return}const K=OPPK[o.kind];
+function renderOpp(){const el=$('#opp');const o=G.specCard?null:G.opp;if(!o){if(!el.hidden){el.hidden=true;el.innerHTML=''}return}const K=OPPK[o.kind];
   if(UI.oppDirty||el.hidden){el.innerHTML=`<div class="eyebrow">Opportunity · time slowed</div><b>${K.title}</b><p>${esc(o.text)}</p><div class="where">◎ ${OPPWHERE[o.kind]||'Marked on the map'}</div><div class="oppbar"><i id="oppbar"></i></div><div class="btnrow">${K.choices.map(([l,c],i)=>`<button class="btn ${c?'':'ghost'} sm" data-act="opp" data-i="${i}">${l}${c?` <span class="cost">${c}</span>`:''}</button>`).join('')}</div>`;el.hidden=false;UI.oppDirty=false;el.classList.toggle('low',o.y<H*.5);el.classList.toggle('left',o.x>W*.55)}
   const b=document.getElementById('oppbar');if(b)b.style.width=Math.max(0,o.left/o.total*100)+'%'}
 function renderCoach(){const inD=draftHome()==='dlg';const el=inD?$('#dlgcoach'):$('#coach');const other=inD?$('#coach'):$('#dlgcoach');if(other){other.hidden=true;other.innerHTML=''}if(!G.coach||(G.opp&&window.innerWidth<=700)){el.hidden=true;el.innerHTML='';return}const T=TIPS[G.coach];el.innerHTML=`<div class="eyebrow">Tip</div><b>${T.t}</b><p>${T.b}</p><div class="btnrow"><button class="btn sm" data-act="tipok">Got it</button><button class="btn ghost sm" data-act="tipoff">Turn off tips</button></div>`;el.hidden=false}
@@ -2245,7 +2288,7 @@ document.addEventListener('pointerover',e=>{const t=e.target.closest&&e.target.c
 document.addEventListener('pointerout',e=>{const t=e.target.closest&&e.target.closest('[data-tip]');if(t&&e.pointerType==='mouse')hidePop()});
 document.addEventListener('focusin',e=>{const t=e.target.closest&&e.target.closest('[data-tip]');if(t)showPop(t)});
 document.addEventListener('focusout',()=>hidePop());
-function uiTick(force){const now=performance.now();renderToast();placeDraft();renderWorldCard();{const n=document.getElementById('somapnote');if(n&&G&&G.mode==='setup'){const k=(G.sstep||1)+G.world;if(n._k!==k){n._k=k;n.innerHTML=mapNoteHTML()}}}
+function uiTick(force){const now=performance.now();renderToast();renderSpecCard();placeDraft();renderWorldCard();{const n=document.getElementById('somapnote');if(n&&G&&G.mode==='setup'){const k=(G.sstep||1)+G.world;if(n._k!==k){n._k=k;n.innerHTML=mapNoteHTML()}}}
   if(UI.oppDirty||G.opp||force)renderOpp();if(UI.coachDirty||force){renderCoach();UI.coachDirty=false}
   if(force||now-lastUI>250){lastUI=now;renderHUD();renderLegend();renderBanner();renderEvent();renderSpecies();
     if(UI.toolsDirty||force){renderTools();UI.toolsDirty=false}
