@@ -397,7 +397,7 @@ kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line2);borde
 (function(){
 'use strict';
 let W=1200,H=720;const GC=30;let GX=40,GY=24,NC=GX*GY;const DT=1/30,EPOCH_LEN=60;let MAXA=3000;const DENS=9,MAXSTR=150;
-let MAXE=20,STEP_MYR=172,LASTLEN=20;function setLen(n){MAXE=n;STEP_MYR=Math.round(3260/(n-1))}
+let MAXE=20,STEP_MYR=172,LASTLEN=20;function setLen(n){MAXE=n;STEP_MYR=Math.round(3260/(n-1))}function applyLen(){setLen(G.len||20);MAXE+=G.ext||0}
 const PH=[36,346,272,12];
 const RH=[158,206,186,226,140,196];
 const EPI=['abyssalis','litoralis','glacialis','aerophilus','solaris','tenax','errans','vagans','robustus','minimus','stromatolithicus','novus','mobilis','borealis','australis','fervens','umbrosus','lucidus','tardus','celer','ferrophilus','oceanicus','profundus','hesperus'];
@@ -1085,7 +1085,7 @@ function newGoal(){const era=Math.floor((G.epoch-1)/4);if(G.goal&&G.goal.era===e
 function checkGoal(){const g=G.goal;if(!g||g.done)return;if(GOALS[g.id].prog()>=1){g.done=true;G.goalsDone=(G.goalsDone||0)+1;addSway(25);logp('ms',`Era goal complete: ${GOALS[g.id].name} (+60 score, +25 sway).`)}}
 function frontierStrain(spId){let tot=0;const L=[];for(const k in G.strains){const q=G.strains[k];if(q.sp===+spId&&q.n>0){tot+=q.n;L.push(q)}}const thr=Math.max(6,tot*.05);
   const sc=q=>q.traits.filter(t=>TR[t].major||TR[t].body).length*10+q.traits.length-q.loads.length*2;let best=null;for(const q of L){if(q.n<thr)continue;if(!best||sc(q)>sc(best)||(sc(q)===sc(best)&&q.n>best.n))best=q}return best||domStrain(spId)}
-function endRun(win){clearSave();sfx(win?'win':'lose');G.over={win};G.mode='over';if(!G.tut){recordBest();PROF.runs=(PROF.runs||0)+1;try{PROF.best=Math.max(PROF.best||0,scoreParts().total)}catch(e){}saveProf();achCheck(true)}if(G.opp){G.opp=null;G.oppPrev=0;UI.oppDirty=true}G.refuges=[];G.currents=[];UI.modalDirty=true;UI.toolsDirty=true;UI.draftDirty=true}
+function endRun(win){clearSave();sfx(win?'win':'lose');G.over={win};G.mode='over';if(!G.tut){if(!G.ext){recordBest();PROF.runs=(PROF.runs||0)+1;G.offScore=scoreParts().total;try{PROF.best=Math.max(PROF.best||0,G.offScore)}catch(e){}}saveProf();achCheck(true)}if(G.opp){G.opp=null;G.oppPrev=0;UI.oppDirty=true}G.refuges=[];G.currents=[];UI.modalDirty=true;UI.toolsDirty=true;UI.draftDirty=true}
 function domesticate(){let n=0;for(const k in G.strains){const q=G.strains[k];const i=q.loads.indexOf('L_codon');if(i<0||(q.foreignUntil||0)>G.t+1)continue;q.loads.splice(i,1);q.sc=stats(q);FC.delete(q.id);SPR.delete(q.id);if(!q.rival&&q.n>0)n++}
   if(n)logp('info',`Foreign genes were domesticated in ${n} of your strain${n>1?'s':''}: codon mismatch gone, full effect now.`)}
 function rivalSpeciate(){const R=rivals();if(R.length>=RIVALN+2||G.epoch<3)return;for(const sp of R){if(rnd()>.3)continue;const tot=spCount(sp.id);if(tot<300||G.epoch-(sp.split||0)<3)continue;
@@ -1363,6 +1363,10 @@ const R_=()=>G.run||(G.run={});
 const myForms=()=>players().map(sp=>{const d=domStrain(sp.id);return d?bodyType(d.sc.f):null}).filter(Boolean);
 const hasComplex=()=>COMPLEX.some(k=>G.ms&&G.ms[k]);
 const won=()=>G.mode==='over'&&G.over&&G.over.win;
+const canExtend=()=>G.mode==='over'&&G.over&&G.over.win&&!G.tut&&players().length>0;
+function extendRun(n){if(!canExtend())return;G.ext=(G.ext||0)+n;MAXE+=n;G.over=null;G.ui_closedEnd=false;G.epoch=Math.min(G.epoch,MAXE);try{logp(`⏳ Time keeps running: ${n} more epochs. The score from the original end still counts for your bests.`)}catch(e){}beginDraft();try{saveGame()}catch(e){}UI.modalDirty=true;UI.toolsDirty=true;UI.draftDirty=true;UI.oppDirty=true}
+function extendHTML(){return canExtend()?`<button class="btn" data-act="extend" data-v="5">⏳ Keep evolving +5</button><button class="btn ghost" data-act="extend" data-v="10">+10 epochs</button>`:''}
+function otNote(){return G.ext?`<p class="why">Overtime: ${G.ext} extra epoch${G.ext>1?'s':''} past the ${G.len}-epoch game. Your score at the original end (${G.offScore??'—'}) is the one saved to bests${G.daily?' and the daily':''}.</p>`:''}
 const nChal=()=>Object.values(G.chal||{}).filter(Boolean).length;
 const ACH=[
  {id:'first',t:'b',n:'Still here',d:'Survive to the final epoch.',end:1,test:()=>won()},
@@ -1548,7 +1552,7 @@ function saveMeta(){try{const m=localStorage.getItem(SAVEK+'_meta');return m?JSO
 function clearSave(){try{localStorage.removeItem(SAVEK);localStorage.removeItem(SAVEK+'_meta')}catch(e){}}
 function resumeGame(){let g=null;try{g=JSON.parse(localStorage.getItem(SAVEK))}catch(e){}
   if(!g||!g.agents||!g.mod||!g.strains){clearSave();flash('The saved game could not be read, so it was discarded.');return false}
-  setWorldSize(g.gx||40);try{camReset()}catch(e){}G=g;setLen(G.len||20);FC.clear();SPR.clear();SHOCK=[];PART=[];HYP={key:'',w:null};albumKey='';head.fill(-1);FLASH=0;ICE=0;
+  setWorldSize(g.gx||40);try{camReset()}catch(e){}G=g;applyLen();FC.clear();SPR.clear();SHOCK=[];PART=[];HYP={key:'',w:null};albumKey='';head.fill(-1);FLASH=0;ICE=0;
   refreshCond();fillPools();buildBuckets();buildBG();if(G.mode==='run')G.speed=0;G.opp=null;G.oppPrev=0;G.coach=null;G.coachQ=[];G.ui_closedEnd=false;
   UI.speciesKey='';UI.draftDirty=true;UI.modalDirty=true;UI.toolsDirty=true;UI.oppDirty=true;UI.coachDirty=true;UI.logDirty=true;UI.chartDirty=true;logp('info','Game resumed. Press 1×, 3×, or 8× to continue.');return true}
 function agoText(t){const m=Math.round((Date.now()-t)/60000);return m<1?'just now':m<60?`${m} min ago`:m<1440?`${Math.round(m/60)} h ago`:`${Math.round(m/1440)} d ago`}
@@ -1931,10 +1935,10 @@ function drawCurrent(x1,y1,x2,y2,a,tnow){const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx
 
 /* ---------------- UI panels ---------------- */
 const UI={draftDirty:true,modalDirty:true,logDirty:true,chartDirty:true,toolsDirty:true,hintDirty:true,speciesKey:''};
-function gya(e){return 3.8-(Math.min(e,MAXE)-1)*(3.26/(MAXE-1))}
-function timeBig(e){if(G.world==='history'){const g=gya(e);return `${g.toFixed(2)}<span>Gya · ${eon(g)}</span>`}return `${((Math.min(e,MAXE)-1)*STEP_MYR/1000).toFixed(2)}<span>Gyr since life began</span>`}
-function timeStr(e){return G.world==='history'?`${gya(e).toFixed(2)} Gya`:`${((Math.min(e,MAXE)-1)*STEP_MYR/1000).toFixed(2)} Gyr in`}
-function eon(g){return g>2.5?'Archean':g>1.6?'Paleoproterozoic':g>1.0?'Mesoproterozoic':'Neoproterozoic'}
+function gya(e){return 3.8-(Math.min(e,MAXE)-1)*(3.26/((G.len||MAXE)-1))}
+function timeBig(e){if(G.world==='history'){const g=gya(e);return g<0?`+${(-g).toFixed(2)}<span>Gyr · deep future</span>`:`${g.toFixed(2)}<span>Gya · ${eon(g)}</span>`}return `${((Math.min(e,MAXE)-1)*STEP_MYR/1000).toFixed(2)}<span>Gyr since life began</span>`}
+function timeStr(e){return G.world==='history'?(gya(e)<0?`${(-gya(e)).toFixed(2)} Gyr from now`:`${gya(e).toFixed(2)} Gya`):`${((Math.min(e,MAXE)-1)*STEP_MYR/1000).toFixed(2)} Gyr in`}
+function eon(g){return g>2.5?'Archean':g>1.6?'Paleoproterozoic':g>1.0?'Mesoproterozoic':g>.54?'Neoproterozoic':g>0?'Phanerozoic':'deep future'}
 function palText(o){return o<.05?'< 0.001% PAL':(Math.pow(10,o-3)*100).toPrecision(o<2?1:2)+'% PAL'}
 function wClass(w){return w>=1.3?'w-good':w>=1?'w-warn':'w-bad'}
 function pips(n,m){return '●'.repeat(n)+'○'.repeat(Math.max(0,m-n))}
@@ -2010,7 +2014,7 @@ function mapNoteHTML(){if((G.sstep||1)===1)return `<span class="lgb" style="--c:
 function worldCardHTML(){const P=PLANETS[G.planet];const d=PDIFF[G.planet]||1;return `<details class="wcard"><summary><span class="eyebrow">This world · ${shareCode()}</span> <b>${G.world==='history'?'Earth':P.name}</b> <span class="why">${ARCH[G.arch].name}${G.world==='history'?'':` · difficulty ${'●'.repeat(d)}${'○'.repeat(5-d)}`}</span></summary><div class="optsbody">${G.world!=='history'?`<p class="why">${P.desc}</p>`:''}<div class="wtraits">${G.traits.map(k=>`<div><b>${WTRAITS[k].name}</b> <span>${WTRAITS[k].fx}</span></div>`).join('')}</div></div></details>`}
 function renderWorldCard(){const el=document.getElementById('worldinfo');if(!el)return;if(!G||G.mode==='setup'){el.hidden=true;return}const k=G.code+G.planet+G.world;if(el._k!==k){el._k=k;el.innerHTML=worldCardHTML()}el.hidden=false}
 function renderDraft(){const el=$('#draft');if(G.mode==='setup'){el.innerHTML=renderSetup();return}
-  if(G.mode==='over'){const sc=scoreParts();el.innerHTML=`<div class="card draft"><div class="eyebrow">${G.over&&G.over.win?'Run complete':'Extinction'} · world ${G.code}</div><h2>${starHTML()} Score ${sc.total}</h2><p class="why">${rank(sc.total)}. ${starHint(stars())}</p><div class="btnrow"><button class="btn" data-act="showend">See results</button><button class="btn ghost" data-act="chron">📜 Chronicle</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="newgame">New world</button></div></div>`;return}
+  if(G.mode==='over'){const sc=scoreParts();el.innerHTML=`<div class="card draft"><div class="eyebrow">${G.over&&G.over.win?'Run complete':'Extinction'} · world ${G.code}</div><h2>${starHTML()} Score ${sc.total}</h2><p class="why">${rank(sc.total)}. ${starHint(stars())}</p><div class="btnrow"><button class="btn" data-act="showend">See results</button>${extendHTML()}<button class="btn ghost" data-act="chron">📜 Chronicle</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="newgame">New world</button></div></div>`;return}
   if(G.mode!=='draft'){el.innerHTML='';return}
   const ids=Object.keys(G.draft);let cur=G.draft[G.sel]?G.sel:+ids[0];const sp=G.species[cur];const dr=G.draft[cur];
   let h=`<div class="card draft"><div class="eyebrow">Epoch ${G.epoch} of ${MAXE} · ${timeStr(G.epoch)} · time is stopped</div>${recapHTML()}<h2>Seed a mutation</h2>`;
@@ -2081,7 +2085,7 @@ function renderChart(){const c=$('#chart');const w=c.clientWidth,h=c.clientHeigh
 function renderLog(){const items=G.log.slice(-18).reverse();$('#log').innerHTML=items.map(x=>`<div><span class="e">E${x.e}</span><span class="t-${x.t}">${esc(x.m)}</span></div>`).join('')}
 function renderModal(){const m=$('#modal');if(G.mode!=='over'||G.ui_closedEnd){m.hidden=true;m.innerHTML='';return}
   const sc=scoreParts(),win=G.over.win;
-  m.innerHTML=`<div class="mcard" role="dialog" aria-modal="true" aria-label="Results"><div class="eyebrow">${win?(G.world==='history'?'0.54 Gya · The Cambrian begins':`${timeStr(MAXE+1)} · The run is complete`):'Extinction'}</div><h2>${win?(G.world==='history'?'Your descendants inherit the Cambrian.':'Your lineage endured.'):'Your last species is gone.'}</h2>
+  m.innerHTML=`<div class="mcard" role="dialog" aria-modal="true" aria-label="Results"><div class="eyebrow">${win?(G.world==='history'&&!G.ext?'0.54 Gya · The Cambrian begins':`${timeStr(MAXE+1)} · The run is complete`):'Extinction'}</div><h2>${win?(G.world==='history'&&!G.ext?'Your descendants inherit the Cambrian.':'Your lineage endured.'):'Your last species is gone.'}</h2>
   ${G.prevBest==null?'':sc.total>G.prevBest?`<div class="newbest">New best on this world! (previous ${G.prevBest})</div>`:`<p class="why">Your best on this world: ${G.prevBest}</p>`}${G.daily?`<p class="why">Daily world ${G.daily}${(PROF.daily||{}).streak>1?` · streak ${(PROF.daily||{}).streak} days`:''}</p>`:''}
   <div><div class="score">${sc.total}</div><div style="font-size:26px">${starHTML()}</div><p class="muted">${rank(sc.total)} · ${starHint(stars())}</p></div>
   ${(G.newAch||[]).length?`<div class="endach"><div class="eyebrow">Achievements this run</div>${G.newAch.map(id=>{const a=ACH.find(x=>x.id===id);return a?`<span class="medalchip" style="--c:${TIERS[a.t].col}">★ ${a.n}</span>`:''}).join('')}</div>`:''}
@@ -2089,7 +2093,7 @@ function renderModal(){const m=$('#modal');if(G.mode!=='over'||G.ui_closedEnd){m
   <table class="ptable"><tr><td>Biomass (${sc.cells} cells ÷ 8)</td><td class="mono">${sc.bio}</td></tr><tr><td>Living species × 30</td><td class="mono">${sc.ln}</td></tr><tr><td>Milestones</td><td class="mono">${sc.ms}</td></tr><tr><td>Rivals driven extinct × 50</td><td class="mono">${sc.rv}</td></tr><tr><td>Era goals × 60</td><td class="mono">${sc.gl}</td></tr><tr><td>New species evolved × 25</td><td class="mono">${sc.sn||0}</td></tr>${sc.mult>1?`<tr><td>Challenge bonus × ${sc.mult.toFixed(2)}</td><td class="mono">+${sc.total-sc.base}</td></tr>`:''}</table>
   <h4>What evolved</h4><ul>${Object.values(G.species).filter(sp=>!sp.rival).map(sp=>{const d=sp.alive?domStrain(sp.id):null;return `<li><i class="sp">${esc(sp.name)}</i>: ${d?formName(orgOf(d)):'extinct'}</li>`}).join('')}</ul>
   <h4>Milestones</h4><ul>${Object.keys(MS).map(k=>`<li class="${G.ms[k]?'t-ms':'muted'}">${MS[k][0]} ${G.ms[k]?`· epoch ${G.ms[k]} (+${MS[k][1]})`:'· not reached'}</li>`).join('')}</ul>
-  <p class="why">World ${shareCode()} · ${ARCH[G.arch].name} · ${G.traits.map(k=>WTRAITS[k].name).join(', ')}</p><div class="btnrow"><button class="btn" data-act="newgame">Roll a new world</button><button class="btn ghost" data-act="chron">📜 Chronicle</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="closeend">Look at the map</button></div></div>`;m.hidden=false;}
+  <p class="why">World ${shareCode()} · ${ARCH[G.arch].name} · ${G.traits.map(k=>WTRAITS[k].name).join(', ')}</p>${otNote()}<div class="btnrow">${extendHTML()}<button class="btn${canExtend()?' ghost':''}" data-act="newgame">Roll a new world</button><button class="btn ghost" data-act="chron">📜 Chronicle</button><button class="btn ghost" data-act="replay">Replay this world</button><button class="btn ghost" data-act="closeend">Look at the map</button></div></div>`;m.hidden=false;}
 
 /* ---------------- input ---------------- */
 /* ---------------- title screen ---------------- */
@@ -2239,6 +2243,7 @@ function act(a,d){if(TUTI>=0&&G&&G.tut)tutEvent(a);switch(a){
   case'begin':if(G.mode==='setup'){G.codeErr='';beginRun();UI.speciesKey=''}break;
   case'copycode':{const sc=shareCode();try{navigator.clipboard.writeText(sc).then(()=>flash('Copied '+sc+'. A friend who loads it gets the same map, planet, size, length, rivals, and challenges.'),()=>flash('Copy failed. The code is '+sc))}catch(e){flash('The code is '+sc)}break}
   case'closeend':G.ui_closedEnd=true;break;
+  case'extend':extendRun(+d.v||5);break;
   case'chron':showChronicle();return;
   case'chronsave':saveChronicle();return;
   case'chronclose':{const el=document.getElementById('chron');el.hidden=true;el.innerHTML='';return}
@@ -2308,7 +2313,7 @@ function frame(now){const dt=Math.min(.1,(now-lastT)/1000);lastT=now;if(TITLE){d
   draw(dt);try{drawScreenUI(performance.now()/1000)}catch(e){}perfTick(dt);if(G.mode==='setup')drawPreview();if(TUTI>=0)tutPlace();if((specLast=(specLast+1)%(LITE?4:2))===0)drawSpecimen();uiTick(false);requestAnimationFrame(frame);}
 window.addEventListener('resize',()=>{resize();UI.chartDirty=true});
 
-function boot(data){try{if(data&&data.G&&data.G.agents&&data.G.mod){setWorldSize(data.G.gx||40);G=data.G;setLen(G.len||20);refreshCond();fillPools()}}catch(e){G=null}if(!G)makeWorld(randSeed(),'open');try{const h=(location.hash||'').replace('#','');if(h&&decodeFull(h)&&!(G.mode==='run'||G.mode==='draft')){applyCode(h,true);TITLE=false;G.sstep=1}}catch(e){}buildBG();resize();applyTab();uiTick(true);renderTitle();requestAnimationFrame(frame);}
+function boot(data){try{if(data&&data.G&&data.G.agents&&data.G.mod){setWorldSize(data.G.gx||40);G=data.G;applyLen();refreshCond();fillPools()}}catch(e){G=null}if(!G)makeWorld(randSeed(),'open');try{const h=(location.hash||'').replace('#','');if(h&&decodeFull(h)&&!(G.mode==='run'||G.mode==='draft')){applyCode(h,true);TITLE=false;G.sstep=1}}catch(e){}buildBG();resize();applyTab();uiTick(true);renderTitle();requestAnimationFrame(frame);}
 try{window.claude&&window.claude.hot&&window.claude.hot.snapshot&&window.claude.hot.snapshot(()=>({G}));}catch(e){}
 try{if(window.claude&&window.claude.hot&&window.claude.hot.ready)window.claude.hot.ready(boot);else boot((window.claude&&window.claude.hot&&window.claude.hot.data)||{});}catch(e){if(!G)boot({})}
 })();
